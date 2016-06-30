@@ -12,6 +12,7 @@ import UIKit
 import Firebase
 import FirebaseInstanceID
 
+@objc(HaloNotificationsAddon)
 public class NotificationsAddon: NSObject, Halo.Addon {
     
     public var addonName = "Notifications"
@@ -75,8 +76,15 @@ public class NotificationsAddon: NSObject, Halo.Addon {
     // MARK: Notifications
     
     public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData, core: CoreManager) {
-        self.token = FIRInstanceID.instanceID().token()
-        self.completionHandler?(self, true)
+        
+        if let user = Halo.Manager.core.user, token = FIRInstanceID.instanceID().token() {
+            user.devices = [UserDevice(platform: "ios", token: token)]
+            Halo.Manager.core.saveUser { _ in
+                self.completionHandler?(self, true)
+            }
+        } else {
+            self.completionHandler?(self, true)
+        }
     }
     
     public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: CoreManager) {
@@ -112,6 +120,11 @@ public class NotificationsAddon: NSObject, Halo.Addon {
     
     @objc
     private func onTokenRefresh() -> Void {
-        self.token = FIRInstanceID.instanceID().token()
+        
+        if let user = Halo.Manager.core.user, token = FIRInstanceID.instanceID().token() {
+            user.devices = [UserDevice(platform: "ios", token: token)]
+            Halo.Manager.core.saveUser()
+        }
+        
     }
 }
