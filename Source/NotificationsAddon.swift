@@ -23,13 +23,13 @@ public class NotificationsAddon: NSObject, Halo.Addon {
     
     // MARK: Addon lifecycle
     
-    public func setup(core: CoreManager, completionHandler handler: ((Bool) -> Void)?) {
+    public func setup(core: CoreManager, completionHandler handler: ((Bool) -> Void)? = nil) {
         // Add observer to listen for the token refresh notification.
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NotificationsAddon.onTokenRefresh), name: kFIRInstanceIDTokenRefreshNotification, object: nil)
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NotificationsAddon.onTokenRefresh), name: kFIRInstanceIDTokenRefreshNotification, object: nil)
         handler?(true)
     }
     
-    public func startup(core: CoreManager, completionHandler handler: ((Addon, Bool) -> Void)?) {
+    public func startup(core: CoreManager, completionHandler handler: ((Addon, Bool) -> Void)? = nil) {
         self.completionHandler = handler
         
         FIRApp.configure()

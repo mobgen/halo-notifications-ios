@@ -10,12 +10,12 @@
 		002924111D1982D30036690B /* GoogleIPhoneUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0029240B1D1982D30036690B /* GoogleIPhoneUtilities.framework */; };
 		003516D81D1978050090CF28 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003516D71D1978050090CF28 /* Halo.framework */; };
 		003516E41D1978E40090CF28 /* Firebase.h in Headers */ = {isa = PBXBuildFile; fileRef = 003516E31D1978E40090CF28 /* Firebase.h */; };
-		003B6BAE1D2418AB00162DA9 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C32A191D19962600FB96E4 /* FirebaseInstanceID.framework */; };
-		003B6BAF1D2418AB00162DA9 /* GoogleInterchangeUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C32A1A1D19962600FB96E4 /* GoogleInterchangeUtilities.framework */; };
-		003B6BB01D2418AB00162DA9 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C32A1B1D19962600FB96E4 /* GoogleSymbolUtilities.framework */; };
-		003B6BB11D2418AB00162DA9 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C32A1C1D19962600FB96E4 /* GoogleUtilities.framework */; };
-		003B6BB21D2418AB00162DA9 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C32A171D1995B200FB96E4 /* FirebaseAnalytics.framework */; };
 		00A409881D11A112005D4FB0 /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A4097F1D11A112005D4FB0 /* FirebaseMessaging.framework */; };
+		00ABC4C71D2AB19E00893DB2 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C32A191D19962600FB96E4 /* FirebaseInstanceID.framework */; };
+		00ABC4C81D2AB19E00893DB2 /* GoogleInterchangeUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C32A1A1D19962600FB96E4 /* GoogleInterchangeUtilities.framework */; };
+		00ABC4C91D2AB19E00893DB2 /* GoogleSymbolUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C32A1B1D19962600FB96E4 /* GoogleSymbolUtilities.framework */; };
+		00ABC4CA1D2AB19E00893DB2 /* GoogleUtilities.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C32A1C1D19962600FB96E4 /* GoogleUtilities.framework */; };
+		00ABC4CB1D2AB19E00893DB2 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C32A171D1995B200FB96E4 /* FirebaseAnalytics.framework */; };
 		00B89FF71D19231700E117A5 /* NotificationsAddon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B89FF61D19231700E117A5 /* NotificationsAddon.swift */; };
 		00B89FFB1D194FEC00E117A5 /* NotificationsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */; };
 /* End PBXBuildFile section */
@@ -28,6 +28,7 @@
 		00A409641D119BAF005D4FB0 /* HaloNotifications.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HaloNotifications.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		00A409771D11A019005D4FB0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Source/Info.plist; sourceTree = "<group>"; };
 		00A4097F1D11A112005D4FB0 /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseMessaging.framework; sourceTree = "<group>"; };
+		00ABC4C21D2A9EA600893DB2 /* HaloAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = HaloAnalytics.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		00B89FF61D19231700E117A5 /* NotificationsAddon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsAddon.swift; sourceTree = "<group>"; };
 		00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsProtocols.swift; sourceTree = "<group>"; };
 		00C32A171D1995B200FB96E4 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
@@ -43,13 +44,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				003516D81D1978050090CF28 /* Halo.framework in Frameworks */,
-				003B6BAE1D2418AB00162DA9 /* FirebaseInstanceID.framework in Frameworks */,
-				003B6BAF1D2418AB00162DA9 /* GoogleInterchangeUtilities.framework in Frameworks */,
-				003B6BB01D2418AB00162DA9 /* GoogleSymbolUtilities.framework in Frameworks */,
-				003B6BB11D2418AB00162DA9 /* GoogleUtilities.framework in Frameworks */,
-				003B6BB21D2418AB00162DA9 /* FirebaseAnalytics.framework in Frameworks */,
 				002924111D1982D30036690B /* GoogleIPhoneUtilities.framework in Frameworks */,
 				00A409881D11A112005D4FB0 /* FirebaseMessaging.framework in Frameworks */,
+				00ABC4C71D2AB19E00893DB2 /* FirebaseInstanceID.framework in Frameworks */,
+				00ABC4C81D2AB19E00893DB2 /* GoogleInterchangeUtilities.framework in Frameworks */,
+				00ABC4C91D2AB19E00893DB2 /* GoogleSymbolUtilities.framework in Frameworks */,
+				00ABC4CA1D2AB19E00893DB2 /* GoogleUtilities.framework in Frameworks */,
+				00ABC4CB1D2AB19E00893DB2 /* FirebaseAnalytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +87,7 @@
 		00A4097A1D11A0F8005D4FB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00ABC4C21D2A9EA600893DB2 /* HaloAnalytics.framework */,
 				003516D71D1978050090CF28 /* Halo.framework */,
 				00A4097B1D11A112005D4FB0 /* Firebase */,
 			);
@@ -287,6 +289,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -298,6 +301,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_MODULES_AUTOLINK = NO;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -311,11 +315,13 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(OTHER_LDFLAGS)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloNotification;
 				PRODUCT_NAME = HaloNotifications;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Frameworks/Firebase";
 			};
 			name = Debug;
@@ -324,6 +330,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CLANG_ENABLE_MODULES = YES;
+				CLANG_MODULES_AUTOLINK = NO;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -337,7 +344,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				OTHER_LDFLAGS = "-ObjC";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"$(OTHER_LDFLAGS)",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloNotification;
 				PRODUCT_NAME = HaloNotifications;
 				SKIP_INSTALL = YES;
