@@ -26,7 +26,7 @@
 		003516E31D1978E40090CF28 /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		003516E51D1978ED0090CF28 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		00A409641D119BAF005D4FB0 /* HaloNotifications.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HaloNotifications.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		00A409771D11A019005D4FB0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Source/Info.plist; sourceTree = "<group>"; };
+		00A409771D11A019005D4FB0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00A4097F1D11A112005D4FB0 /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseMessaging.framework; sourceTree = "<group>"; };
 		00B89FF61D19231700E117A5 /* NotificationsAddon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsAddon.swift; sourceTree = "<group>"; };
 		00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsProtocols.swift; sourceTree = "<group>"; };
@@ -59,10 +59,10 @@
 		00A4095A1D119BAF005D4FB0 = {
 			isa = PBXGroup;
 			children = (
-				00A409751D11A019005D4FB0 /* Source */,
-				00C32A121D19904200FB96E4 /* Supporting Files */,
 				00A4097A1D11A0F8005D4FB0 /* Frameworks */,
 				00A409651D119BAF005D4FB0 /* Products */,
+				00A409751D11A019005D4FB0 /* Source */,
+				00C32A121D19904200FB96E4 /* Supporting Files */,
 			);
 			sourceTree = "<group>";
 		};
@@ -309,7 +309,7 @@
 					"$(PROJECT_DIR)/Frameworks/Firebase",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -317,7 +317,7 @@
 					"-ObjC",
 					"$(OTHER_LDFLAGS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloNotification;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloNotifications;
 				PRODUCT_NAME = HaloNotifications;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Frameworks/Firebase";
@@ -338,7 +338,7 @@
 					"$(PROJECT_DIR)/Frameworks/Firebase",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -346,7 +346,7 @@
 					"-ObjC",
 					"$(OTHER_LDFLAGS)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloNotification;
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloNotifications;
 				PRODUCT_NAME = HaloNotifications;
 				SKIP_INSTALL = YES;
 				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/Frameworks/Firebase";
