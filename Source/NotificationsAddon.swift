@@ -13,7 +13,7 @@ import Firebase
 import FirebaseInstanceID
 
 @objc(HaloNotificationsAddon)
-public class NotificationsAddon: NSObject, Halo.Addon {
+public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
     
     public var addonName = "Notifications"
     public var delegate: NotificationsDelegate?
