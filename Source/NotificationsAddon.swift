@@ -37,8 +37,6 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
         UIApplication.sharedApplication().registerForRemoteNotifications()
-        
-        handler?(self, true)
     }
     
     public func willRegisterAddon(core: CoreManager) {
