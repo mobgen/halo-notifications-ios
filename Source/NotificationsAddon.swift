@@ -107,6 +107,7 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
                 completionHandler(.NoData)
             }
         } else {
+            completionHandler(.NoData)
             self.delegate?.haloApplication(application, didReceiveNotification: userInfo)
         }
     }
