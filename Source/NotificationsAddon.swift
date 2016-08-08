@@ -104,11 +104,11 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
                 notif.userInfo = userInfo
                 
                 application.presentLocalNotificationNow(notif)
-                completionHandler(.NoData)
+                completionHandler(.NewData)
             }
         } else {
-            completionHandler(.NoData)
             self.delegate?.haloApplication(application, didReceiveNotification: userInfo)
+            completionHandler(.NewData)
         }
     }
     
