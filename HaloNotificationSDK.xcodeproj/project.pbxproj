@@ -18,6 +18,46 @@
 		00ABC4E31D2BC40500893DB2 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C32A171D1995B200FB96E4 /* FirebaseAnalytics.framework */; };
 		00B89FF71D19231700E117A5 /* NotificationsAddon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B89FF61D19231700E117A5 /* NotificationsAddon.swift */; };
 		00B89FFB1D194FEC00E117A5 /* NotificationsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */; };
+		00E9BA241D5510650020D327 /* adara.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9B9FC1D5510650020D327 /* adara.aiff */; };
+		00E9BA251D5510650020D327 /* alya.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9B9FD1D5510650020D327 /* alya.aiff */; };
+		00E9BA261D5510650020D327 /* antimony.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9B9FE1D5510650020D327 /* antimony.aiff */; };
+		00E9BA271D5510650020D327 /* argon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9B9FF1D5510650020D327 /* argon.aiff */; };
+		00E9BA281D5510650020D327 /* ariel.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA001D5510650020D327 /* ariel.aiff */; };
+		00E9BA291D5510650020D327 /* beryllium.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA011D5510650020D327 /* beryllium.aiff */; };
+		00E9BA2A1D5510650020D327 /* blip.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA021D5510650020D327 /* blip.aiff */; };
+		00E9BA2B1D5510650020D327 /* carme.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA031D5510650020D327 /* carme.aiff */; };
+		00E9BA2C1D5510650020D327 /* castor.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA041D5510650020D327 /* castor.aiff */; };
+		00E9BA2D1D5510650020D327 /* ceres.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA051D5510650020D327 /* ceres.aiff */; };
+		00E9BA2E1D5510650020D327 /* chime.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA061D5510650020D327 /* chime.aiff */; };
+		00E9BA2F1D5510650020D327 /* cobalt.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA071D5510650020D327 /* cobalt.aiff */; };
+		00E9BA301D5510650020D327 /* cyanmessage.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA081D5510650020D327 /* cyanmessage.aiff */; };
+		00E9BA311D5510650020D327 /* dontpanic.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA091D5510650020D327 /* dontpanic.aiff */; };
+		00E9BA321D5510650020D327 /* elara.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA0A1D5510650020D327 /* elara.aiff */; };
+		00E9BA331D5510650020D327 /* element.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA0B1D5510650020D327 /* element.aiff */; };
+		00E9BA341D5510650020D327 /* europa.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA0C1D5510650020D327 /* europa.aiff */; };
+		00E9BA351D5510650020D327 /* f1_missedcall.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA0D1D5510650020D327 /* f1_missedcall.aiff */; };
+		00E9BA361D5510650020D327 /* f1_new_sms.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA0E1D5510650020D327 /* f1_new_sms.aiff */; };
+		00E9BA371D5510650020D327 /* fluorine.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA0F1D5510650020D327 /* fluorine.aiff */; };
+		00E9BA381D5510650020D327 /* hello.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA101D5510650020D327 /* hello.aiff */; };
+		00E9BA391D5510650020D327 /* hojus.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA111D5510650020D327 /* hojus.aiff */; };
+		00E9BA3A1D5510650020D327 /* ivory.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA121D5510650020D327 /* ivory.aiff */; };
+		00E9BA3B1D5510650020D327 /* mira.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA131D5510650020D327 /* mira.aiff */; };
+		00E9BA3C1D5510650020D327 /* modular.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA141D5510650020D327 /* modular.aiff */; };
+		00E9BA3D1D5510650020D327 /* moto.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA151D5510650020D327 /* moto.aiff */; };
+		00E9BA3E1D5510650020D327 /* natural.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA161D5510650020D327 /* natural.aiff */; };
+		00E9BA3F1D5510650020D327 /* organic.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA171D5510650020D327 /* organic.aiff */; };
+		00E9BA401D5510650020D327 /* ping.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA181D5510650020D327 /* ping.aiff */; };
+		00E9BA411D5510650020D327 /* pixiedust.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA191D5510650020D327 /* pixiedust.aiff */; };
+		00E9BA421D5510650020D327 /* pizzicato.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA1A1D5510650020D327 /* pizzicato.aiff */; };
+		00E9BA431D5510650020D327 /* proxima.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA1B1D5510650020D327 /* proxima.aiff */; };
+		00E9BA441D5510650020D327 /* radon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA1C1D5510650020D327 /* radon.aiff */; };
+		00E9BA451D5510650020D327 /* rhea.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA1D1D5510650020D327 /* rhea.aiff */; };
+		00E9BA461D5510650020D327 /* selenium.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA1E1D5510650020D327 /* selenium.aiff */; };
+		00E9BA471D5510650020D327 /* sirius.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA1F1D5510650020D327 /* sirius.aiff */; };
+		00E9BA481D5510650020D327 /* tada.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA201D5510650020D327 /* tada.aiff */; };
+		00E9BA491D5510650020D327 /* tethys.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA211D5510650020D327 /* tethys.aiff */; };
+		00E9BA4A1D5510650020D327 /* upsilon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA221D5510650020D327 /* upsilon.aiff */; };
+		00E9BA4B1D5510650020D327 /* voila.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA231D5510650020D327 /* voila.aiff */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +75,46 @@
 		00C32A1A1D19962600FB96E4 /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
 		00C32A1B1D19962600FB96E4 /* GoogleSymbolUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleSymbolUtilities.framework; sourceTree = "<group>"; };
 		00C32A1C1D19962600FB96E4 /* GoogleUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleUtilities.framework; sourceTree = "<group>"; };
+		00E9B9FC1D5510650020D327 /* adara.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = adara.aiff; sourceTree = "<group>"; };
+		00E9B9FD1D5510650020D327 /* alya.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = alya.aiff; sourceTree = "<group>"; };
+		00E9B9FE1D5510650020D327 /* antimony.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = antimony.aiff; sourceTree = "<group>"; };
+		00E9B9FF1D5510650020D327 /* argon.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = argon.aiff; sourceTree = "<group>"; };
+		00E9BA001D5510650020D327 /* ariel.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = ariel.aiff; sourceTree = "<group>"; };
+		00E9BA011D5510650020D327 /* beryllium.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = beryllium.aiff; sourceTree = "<group>"; };
+		00E9BA021D5510650020D327 /* blip.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = blip.aiff; sourceTree = "<group>"; };
+		00E9BA031D5510650020D327 /* carme.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = carme.aiff; sourceTree = "<group>"; };
+		00E9BA041D5510650020D327 /* castor.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = castor.aiff; sourceTree = "<group>"; };
+		00E9BA051D5510650020D327 /* ceres.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = ceres.aiff; sourceTree = "<group>"; };
+		00E9BA061D5510650020D327 /* chime.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = chime.aiff; sourceTree = "<group>"; };
+		00E9BA071D5510650020D327 /* cobalt.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = cobalt.aiff; sourceTree = "<group>"; };
+		00E9BA081D5510650020D327 /* cyanmessage.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = cyanmessage.aiff; sourceTree = "<group>"; };
+		00E9BA091D5510650020D327 /* dontpanic.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = dontpanic.aiff; sourceTree = "<group>"; };
+		00E9BA0A1D5510650020D327 /* elara.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = elara.aiff; sourceTree = "<group>"; };
+		00E9BA0B1D5510650020D327 /* element.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = element.aiff; sourceTree = "<group>"; };
+		00E9BA0C1D5510650020D327 /* europa.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = europa.aiff; sourceTree = "<group>"; };
+		00E9BA0D1D5510650020D327 /* f1_missedcall.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = f1_missedcall.aiff; sourceTree = "<group>"; };
+		00E9BA0E1D5510650020D327 /* f1_new_sms.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = f1_new_sms.aiff; sourceTree = "<group>"; };
+		00E9BA0F1D5510650020D327 /* fluorine.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = fluorine.aiff; sourceTree = "<group>"; };
+		00E9BA101D5510650020D327 /* hello.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = hello.aiff; sourceTree = "<group>"; };
+		00E9BA111D5510650020D327 /* hojus.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = hojus.aiff; sourceTree = "<group>"; };
+		00E9BA121D5510650020D327 /* ivory.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = ivory.aiff; sourceTree = "<group>"; };
+		00E9BA131D5510650020D327 /* mira.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = mira.aiff; sourceTree = "<group>"; };
+		00E9BA141D5510650020D327 /* modular.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = modular.aiff; sourceTree = "<group>"; };
+		00E9BA151D5510650020D327 /* moto.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = moto.aiff; sourceTree = "<group>"; };
+		00E9BA161D5510650020D327 /* natural.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = natural.aiff; sourceTree = "<group>"; };
+		00E9BA171D5510650020D327 /* organic.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = organic.aiff; sourceTree = "<group>"; };
+		00E9BA181D5510650020D327 /* ping.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = ping.aiff; sourceTree = "<group>"; };
+		00E9BA191D5510650020D327 /* pixiedust.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = pixiedust.aiff; sourceTree = "<group>"; };
+		00E9BA1A1D5510650020D327 /* pizzicato.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = pizzicato.aiff; sourceTree = "<group>"; };
+		00E9BA1B1D5510650020D327 /* proxima.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = proxima.aiff; sourceTree = "<group>"; };
+		00E9BA1C1D5510650020D327 /* radon.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = radon.aiff; sourceTree = "<group>"; };
+		00E9BA1D1D5510650020D327 /* rhea.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = rhea.aiff; sourceTree = "<group>"; };
+		00E9BA1E1D5510650020D327 /* selenium.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = selenium.aiff; sourceTree = "<group>"; };
+		00E9BA1F1D5510650020D327 /* sirius.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = sirius.aiff; sourceTree = "<group>"; };
+		00E9BA201D5510650020D327 /* tada.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = tada.aiff; sourceTree = "<group>"; };
+		00E9BA211D5510650020D327 /* tethys.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = tethys.aiff; sourceTree = "<group>"; };
+		00E9BA221D5510650020D327 /* upsilon.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = upsilon.aiff; sourceTree = "<group>"; };
+		00E9BA231D5510650020D327 /* voila.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = voila.aiff; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +141,7 @@
 			children = (
 				00A4097A1D11A0F8005D4FB0 /* Frameworks */,
 				00A409651D119BAF005D4FB0 /* Products */,
+				00E9B9FB1D5510650020D327 /* Sounds */,
 				00A409751D11A019005D4FB0 /* Source */,
 				00C32A121D19904200FB96E4 /* Supporting Files */,
 			);
@@ -115,6 +196,53 @@
 				00A409771D11A019005D4FB0 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		00E9B9FB1D5510650020D327 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				00E9B9FC1D5510650020D327 /* adara.aiff */,
+				00E9B9FD1D5510650020D327 /* alya.aiff */,
+				00E9B9FE1D5510650020D327 /* antimony.aiff */,
+				00E9B9FF1D5510650020D327 /* argon.aiff */,
+				00E9BA001D5510650020D327 /* ariel.aiff */,
+				00E9BA011D5510650020D327 /* beryllium.aiff */,
+				00E9BA021D5510650020D327 /* blip.aiff */,
+				00E9BA031D5510650020D327 /* carme.aiff */,
+				00E9BA041D5510650020D327 /* castor.aiff */,
+				00E9BA051D5510650020D327 /* ceres.aiff */,
+				00E9BA061D5510650020D327 /* chime.aiff */,
+				00E9BA071D5510650020D327 /* cobalt.aiff */,
+				00E9BA081D5510650020D327 /* cyanmessage.aiff */,
+				00E9BA091D5510650020D327 /* dontpanic.aiff */,
+				00E9BA0A1D5510650020D327 /* elara.aiff */,
+				00E9BA0B1D5510650020D327 /* element.aiff */,
+				00E9BA0C1D5510650020D327 /* europa.aiff */,
+				00E9BA0D1D5510650020D327 /* f1_missedcall.aiff */,
+				00E9BA0E1D5510650020D327 /* f1_new_sms.aiff */,
+				00E9BA0F1D5510650020D327 /* fluorine.aiff */,
+				00E9BA101D5510650020D327 /* hello.aiff */,
+				00E9BA111D5510650020D327 /* hojus.aiff */,
+				00E9BA121D5510650020D327 /* ivory.aiff */,
+				00E9BA131D5510650020D327 /* mira.aiff */,
+				00E9BA141D5510650020D327 /* modular.aiff */,
+				00E9BA151D5510650020D327 /* moto.aiff */,
+				00E9BA161D5510650020D327 /* natural.aiff */,
+				00E9BA171D5510650020D327 /* organic.aiff */,
+				00E9BA181D5510650020D327 /* ping.aiff */,
+				00E9BA191D5510650020D327 /* pixiedust.aiff */,
+				00E9BA1A1D5510650020D327 /* pizzicato.aiff */,
+				00E9BA1B1D5510650020D327 /* proxima.aiff */,
+				00E9BA1C1D5510650020D327 /* radon.aiff */,
+				00E9BA1D1D5510650020D327 /* rhea.aiff */,
+				00E9BA1E1D5510650020D327 /* selenium.aiff */,
+				00E9BA1F1D5510650020D327 /* sirius.aiff */,
+				00E9BA201D5510650020D327 /* tada.aiff */,
+				00E9BA211D5510650020D327 /* tethys.aiff */,
+				00E9BA221D5510650020D327 /* upsilon.aiff */,
+				00E9BA231D5510650020D327 /* voila.aiff */,
+			);
+			path = Sounds;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,6 +313,46 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00E9BA251D5510650020D327 /* alya.aiff in Resources */,
+				00E9BA2E1D5510650020D327 /* chime.aiff in Resources */,
+				00E9BA441D5510650020D327 /* radon.aiff in Resources */,
+				00E9BA381D5510650020D327 /* hello.aiff in Resources */,
+				00E9BA3A1D5510650020D327 /* ivory.aiff in Resources */,
+				00E9BA281D5510650020D327 /* ariel.aiff in Resources */,
+				00E9BA271D5510650020D327 /* argon.aiff in Resources */,
+				00E9BA461D5510650020D327 /* selenium.aiff in Resources */,
+				00E9BA391D5510650020D327 /* hojus.aiff in Resources */,
+				00E9BA321D5510650020D327 /* elara.aiff in Resources */,
+				00E9BA361D5510650020D327 /* f1_new_sms.aiff in Resources */,
+				00E9BA481D5510650020D327 /* tada.aiff in Resources */,
+				00E9BA351D5510650020D327 /* f1_missedcall.aiff in Resources */,
+				00E9BA241D5510650020D327 /* adara.aiff in Resources */,
+				00E9BA2C1D5510650020D327 /* castor.aiff in Resources */,
+				00E9BA301D5510650020D327 /* cyanmessage.aiff in Resources */,
+				00E9BA2A1D5510650020D327 /* blip.aiff in Resources */,
+				00E9BA401D5510650020D327 /* ping.aiff in Resources */,
+				00E9BA421D5510650020D327 /* pizzicato.aiff in Resources */,
+				00E9BA431D5510650020D327 /* proxima.aiff in Resources */,
+				00E9BA411D5510650020D327 /* pixiedust.aiff in Resources */,
+				00E9BA3B1D5510650020D327 /* mira.aiff in Resources */,
+				00E9BA261D5510650020D327 /* antimony.aiff in Resources */,
+				00E9BA331D5510650020D327 /* element.aiff in Resources */,
+				00E9BA491D5510650020D327 /* tethys.aiff in Resources */,
+				00E9BA4B1D5510650020D327 /* voila.aiff in Resources */,
+				00E9BA2F1D5510650020D327 /* cobalt.aiff in Resources */,
+				00E9BA311D5510650020D327 /* dontpanic.aiff in Resources */,
+				00E9BA2B1D5510650020D327 /* carme.aiff in Resources */,
+				00E9BA2D1D5510650020D327 /* ceres.aiff in Resources */,
+				00E9BA3E1D5510650020D327 /* natural.aiff in Resources */,
+				00E9BA371D5510650020D327 /* fluorine.aiff in Resources */,
+				00E9BA3F1D5510650020D327 /* organic.aiff in Resources */,
+				00E9BA291D5510650020D327 /* beryllium.aiff in Resources */,
+				00E9BA4A1D5510650020D327 /* upsilon.aiff in Resources */,
+				00E9BA341D5510650020D327 /* europa.aiff in Resources */,
+				00E9BA451D5510650020D327 /* rhea.aiff in Resources */,
+				00E9BA3D1D5510650020D327 /* moto.aiff in Resources */,
+				00E9BA471D5510650020D327 /* sirius.aiff in Resources */,
+				00E9BA3C1D5510650020D327 /* modular.aiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,7 +479,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -340,7 +508,7 @@
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
