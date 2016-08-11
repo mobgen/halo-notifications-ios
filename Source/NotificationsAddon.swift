@@ -94,20 +94,21 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
 
         self.delegate?.haloApplication(application, didReceiveRemoteNotification: userInfo)
 
-        if let silent = userInfo["content_available"] as? String {
-            if silent == "1" {
-                self.delegate?.haloApplication(application, didReceiveSilentNotification: userInfo, fetchCompletionHandler: completionHandler)
-            } else {
-                let notif = UILocalNotification()
-                notif.alertBody = userInfo["body"] as? String
-                notif.soundName = userInfo["sound"] as? String
-                notif.userInfo = userInfo
-
-                application.presentLocalNotificationNow(notif)
-                completionHandler(.NewData)
-            }
+        if let silent = userInfo["content_available"] as? String where silent == "1" {
+            self.delegate?.haloApplication(application, didReceiveSilentNotification: userInfo, fetchCompletionHandler: completionHandler)
         } else {
-            self.delegate?.haloApplication(application, didReceiveNotification: userInfo)
+
+            let notif = UILocalNotification()
+
+            notif.userInfo = userInfo
+
+            notif.alertBody = userInfo["body"] as? String
+
+            if let sound = userInfo["sound"] as? String {
+                notif.soundName = "Frameworks/HaloNotifications.framework/\(sound).aiff"
+            }
+
+            application.presentLocalNotificationNow(notif)
             completionHandler(.NewData)
         }
     }
