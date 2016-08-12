@@ -94,11 +94,7 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
 
         self.delegate?.haloApplication(application, didReceiveRemoteNotification: userInfo)
 
-        let jsonData: NSData = try! NSJSONSerialization.dataWithJSONObject(userInfo, options: NSJSONWritingOptions.PrettyPrinted)
-
-        if let json = NSString(data: jsonData, encoding: NSUTF8StringEncoding) as? String {
-            NSLog("Push notification received: \(json)")
-        }
+        NSLog("Push notification received: \(userInfo.description)")
 
         if let silent = userInfo["content_available"] as? String where silent == "1" {
             self.delegate?.haloApplication(application, didReceiveSilentNotification: userInfo, fetchCompletionHandler: completionHandler)
