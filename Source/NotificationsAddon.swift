@@ -94,8 +94,6 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
 
         self.delegate?.haloApplication(application, didReceiveRemoteNotification: userInfo)
 
-        NSLog("Push notification received: \(userInfo)")
-
         if let silent = userInfo["content_available"] as? String where silent == "1" {
             self.delegate?.haloApplication(application, didReceiveSilentNotification: userInfo, fetchCompletionHandler: completionHandler)
         } else {
