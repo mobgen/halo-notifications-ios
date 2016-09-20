@@ -75,7 +75,7 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
 
     public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData, core: CoreManager) {
 
-        if let user = Halo.Manager.core.user, token = FIRInstanceID.instanceID().token() {
+        if let user = Halo.Manager.core.user, let token = FIRInstanceID.instanceID().token() {
             user.devices = [UserDevice(platform: "ios", token: token)]
             Halo.Manager.core.saveUser { _ in
                 self.completionHandler?(self, true)
@@ -105,7 +105,7 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
     @objc
     private func onTokenRefresh() -> Void {
 
-        if let user = Halo.Manager.core.user, token = FIRInstanceID.instanceID().token() {
+        if let user = Halo.Manager.core.user, let token = FIRInstanceID.instanceID().token() {
             user.devices = [UserDevice(platform: "ios", token: token)]
             Halo.Manager.core.saveUser()
         }
