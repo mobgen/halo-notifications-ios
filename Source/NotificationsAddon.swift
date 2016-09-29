@@ -23,13 +23,13 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
 
     // MARK: Addon lifecycle
 
-    public func setup(core: CoreManager, completionHandler handler: ((Addon, Bool) -> Void)? = nil) {
+    public func setup(haloCore core: CoreManager, completionHandler handler: ((Addon, Bool) -> Void)? = nil) {
         // Add observer to listen for the token refresh notification.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(NotificationsAddon.onTokenRefresh), name: kFIRInstanceIDTokenRefreshNotification, object: nil)
         handler?(self, true)
     }
 
-    public func startup(core: CoreManager, completionHandler handler: ((Addon, Bool) -> Void)? = nil) {
+    public func startup(haloCore core: CoreManager, completionHandler handler: ((Addon, Bool) -> Void)? = nil) {
         self.completionHandler = handler
 
         FIRApp.configure()
@@ -39,41 +39,41 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
         UIApplication.sharedApplication().registerForRemoteNotifications()
     }
 
-    public func willRegisterAddon(core: CoreManager) {
+    public func willRegisterAddon(haloCore core: CoreManager) {
 
     }
 
-    public func didRegisterAddon(core: CoreManager) {
+    public func didRegisterAddon(haloCore core: CoreManager) {
 
     }
 
     // MARK: User
 
-    public func willRegisterUser(core: CoreManager) {
+    public func willRegisterUser(haloCore core: CoreManager) {
 
     }
 
-    public func didRegisterUser(core: CoreManager) {
+    public func didRegisterUser(haloCore core: CoreManager) {
 
     }
 
     // MARK: Application lifecycle
 
-    public func applicationDidFinishLaunching(application: UIApplication, core: CoreManager) {
+    public func applicationDidFinishLaunching(application app: UIApplication, core: CoreManager) {
 
     }
 
-    public func applicationDidBecomeActive(application: UIApplication, core: CoreManager) {
+    public func applicationDidBecomeActive(application app: UIApplication, core: CoreManager) {
 
     }
 
-    public func applicationDidEnterBackground(application: UIApplication, core: CoreManager) {
+    public func applicationDidEnterBackground(application app: UIApplication, core: CoreManager) {
 
     }
 
     // MARK: Notifications
 
-    public func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData, core: CoreManager) {
+    public func application(application app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData, core: CoreManager) {
 
         if let user = Halo.Manager.core.user, let token = FIRInstanceID.instanceID().token() {
             user.devices = [UserDevice(platform: "ios", token: token)]
@@ -85,19 +85,19 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
         }
     }
 
-    public func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: CoreManager) {
+    public func application(application app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: CoreManager) {
 
         self.completionHandler?(self, false)
     }
 
-    public func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], core: CoreManager, fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    public func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], core: CoreManager, fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
 
-        self.delegate?.haloApplication(application, didReceiveRemoteNotification: userInfo)
+        self.delegate?.haloApplication(application: app, didReceiveRemoteNotification: userInfo)
 
         if let silent = userInfo["content_available"] as? String where silent == "1" {
-            self.delegate?.haloApplication(application, didReceiveSilentNotification: userInfo, fetchCompletionHandler: completionHandler)
+            self.delegate?.haloApplication(application: app, didReceiveSilentNotification: userInfo, fetchCompletionHandler: completionHandler)
         } else {
-            self.delegate?.haloApplication(application, didReceiveNotification: userInfo)
+            self.delegate?.haloApplication(application: app, didReceiveNotification: userInfo)
             completionHandler(.NewData)
         }
     }
