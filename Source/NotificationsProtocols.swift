@@ -19,6 +19,7 @@ public protocol NotificationsDelegate {
      - parameter userInfo:          Dictionary containing information about the push notification
      - parameter completionHandler: Closure to be called after completion
      */
+    @objc(haloApplication:didReceiveRemoteNotification:)
     func haloApplication(application app: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) -> Void
 
     /**
@@ -28,6 +29,7 @@ public protocol NotificationsDelegate {
      - parameter userInfo:          Dictionary containing information about the push notification
      - parameter completionHandler: Closure to be called after completion
      */
+    @objc(haloApplication:didReceiveSilentNotification:fetchCompletionHandler:)
     func haloApplication(application app: UIApplication, didReceiveSilentNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
 
     /**
@@ -37,5 +39,6 @@ public protocol NotificationsDelegate {
      - parameter userInfo:          Dictionary containing information about the push notification
      - parameter completionHandler: Closure to be called after completion
      */
+    @objc(haloApplication:didReceiveNotification:)
     func haloApplication(application app: UIApplication, didReceiveNotification userInfo: [NSObject : AnyObject]) -> Void
 }
