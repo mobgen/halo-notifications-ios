@@ -75,9 +75,9 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
 
     public func application(application app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData, core: CoreManager) {
 
-        if let user = Halo.Manager.core.user, let token = FIRInstanceID.instanceID().token() {
-            user.devices = [UserDevice(platform: "ios", token: token)]
-            Halo.Manager.core.saveUser { _ in
+        if let device = Halo.Manager.core.device, let token = FIRInstanceID.instanceID().token() {
+            device.info = DeviceInfo(platform: "ios", token: token)
+            Halo.Manager.core.saveDevice { _ in
                 self.completionHandler?(self, true)
             }
         } else {
@@ -92,12 +92,12 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
 
     public func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], core: CoreManager, fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
 
-        self.delegate?.haloApplication(application: app, didReceiveRemoteNotification: userInfo)
+        self.delegate?.haloApplication(app, didReceiveRemoteNotification: userInfo)
 
         if let silent = userInfo["content_available"] as? String where silent == "1" {
-            self.delegate?.haloApplication(application: app, didReceiveSilentNotification: userInfo, fetchCompletionHandler: completionHandler)
+            self.delegate?.haloApplication(app, didReceiveSilentNotification: userInfo, fetchCompletionHandler: completionHandler)
         } else {
-            self.delegate?.haloApplication(application: app, didReceiveNotification: userInfo)
+            self.delegate?.haloApplication(app, didReceiveNotification: userInfo)
             completionHandler(.NewData)
         }
     }
@@ -105,9 +105,9 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
     @objc
     private func onTokenRefresh() -> Void {
 
-        if let user = Halo.Manager.core.user, let token = FIRInstanceID.instanceID().token() {
-            user.devices = [UserDevice(platform: "ios", token: token)]
-            Halo.Manager.core.saveUser()
+        if let device = Halo.Manager.core.device, let token = FIRInstanceID.instanceID().token() {
+            device.info = DeviceInfo(platform: "ios", token: token)
+            Halo.Manager.core.saveDevice()
         }
 
     }
