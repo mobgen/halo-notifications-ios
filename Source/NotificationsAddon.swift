@@ -47,13 +47,13 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
 
     }
 
-    // MARK: User
+    // MARK: Device
 
-    public func willRegisterUser(haloCore core: CoreManager) {
+    public func willRegisterDevice(haloCore core: CoreManager) {
 
     }
 
-    public func didRegisterUser(haloCore core: CoreManager) {
+    public func didRegisterDevice(haloCore core: CoreManager) {
 
     }
 
