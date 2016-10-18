@@ -21,6 +21,9 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
     private var completionHandler: ((Addon, Bool) -> Void)?
     public var token: String?
 
+    /// Token used to make sure the startup process is done only once
+    private var once_token: dispatch_once_t = 0
+    
     // MARK: Addon lifecycle
 
     @objc(setup:completionHandler:)
@@ -34,7 +37,9 @@ public class NotificationsAddon: NSObject, Halo.NotificationsAddon {
     public func startup(haloCore core: CoreManager, completionHandler handler: ((Addon, Bool) -> Void)? = nil) {
         self.completionHandler = handler
 
-        FIRApp.configure()
+        dispatch_once(&once_token) {
+            FIRApp.configure()
+        }
 
         let settings = UIUserNotificationSettings(forTypes: [.Alert, .Badge, .Sound], categories: nil)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
