@@ -109,7 +109,7 @@ open class NotificationsAddon: NSObject, Halo.NotificationsAddon {
     }
 
     @objc(application:didReceiveRemoteNotification:core:fetchCompletionHandler:)
-    open func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: CoreManager, fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    open func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: CoreManager, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 
         self.delegate?.haloApplication(app, didReceiveRemoteNotification: userInfo)
 
