@@ -108,15 +108,15 @@ open class NotificationsAddon: NSObject, Halo.NotificationsAddon {
         self.completionHandler?(self, false)
     }
 
-    @objc(application:didReceiveRemoteNotification:core:fetchCompletionHandler:)
-    open func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: CoreManager, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    @objc(application:didReceiveRemoteNotification:core:userInteraction:fetchCompletionHandler:)
+    open func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 
-        self.delegate?.haloApplication(app, didReceiveRemoteNotification: userInfo)
+        self.delegate?.haloApplication(app, didReceiveRemoteNotification: userInfo, userInteraction: user)
 
         if let silent = userInfo["content_available"] as? String , silent == "1" {
             self.delegate?.haloApplication(app, didReceiveSilentNotification: userInfo, fetchCompletionHandler: completionHandler)
         } else {
-            self.delegate?.haloApplication(app, didReceiveNotification: userInfo)
+            self.delegate?.haloApplication(app, didReceiveNotification: userInfo, userInteraction: user)
             completionHandler(.newData)
         }
     }

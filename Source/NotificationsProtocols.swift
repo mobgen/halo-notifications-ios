@@ -19,7 +19,7 @@ public protocol NotificationsDelegate {
      - parameter userInfo:          Dictionary containing information about the push notification
      - parameter completionHandler: Closure to be called after completion
      */
-    func haloApplication(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) -> Void
+    func haloApplication(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], userInteraction user: Bool) -> Void
 
     /**
      This handler will be called when a silent push notification is received
@@ -37,5 +37,5 @@ public protocol NotificationsDelegate {
      - parameter userInfo:          Dictionary containing information about the push notification
      - parameter completionHandler: Closure to be called after completion
      */
-    func haloApplication(_ application: UIApplication, didReceiveNotification userInfo: [AnyHashable: Any]) -> Void
+    func haloApplication(_ application: UIApplication, didReceiveNotification userInfo: [AnyHashable: Any], userInteraction user: Bool) -> Void
 }
