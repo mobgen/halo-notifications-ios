@@ -17,7 +17,7 @@ public protocol NotificationsDelegate {
 
      - parameter application:       Application receiving the push notification
      - parameter userInfo:          Dictionary containing information about the push notification
-     - parameter completionHandler: Closure to be called after completion
+     - parameter userInteraction:   Whether the execution of this delegate has been triggered by a user action or not
      */
     func haloApplication(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], userInteraction user: Bool) -> Void
 
@@ -35,7 +35,7 @@ public protocol NotificationsDelegate {
 
      - parameter application:       Application receiving the silent push notification
      - parameter userInfo:          Dictionary containing information about the push notification
-     - parameter completionHandler: Closure to be called after completion
+     - parameter userInteraction:   Whether the execution of this delegate has been triggered by a user action or not
      */
     func haloApplication(application: UIApplication, didReceiveNotification userInfo: [NSObject : AnyObject], userInteraction user: Bool) -> Void
 }
