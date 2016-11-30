@@ -7,13 +7,14 @@
 //
 
 import Foundation
+import UserNotifications
 import Halo
 import UIKit
 import Firebase
 import FirebaseInstanceID
 
 @objc(HaloNotificationsAddon)
-open class NotificationsAddon: NSObject, Halo.NotificationsAddon {
+open class NotificationsAddon: NSObject, Halo.NotificationsAddon, Halo.LifecycleAddon, UNUserNotificationCenterDelegate {
 
     open var addonName = "Notifications"
     open var delegate: NotificationsDelegate?
@@ -39,8 +40,6 @@ open class NotificationsAddon: NSObject, Halo.NotificationsAddon {
             FIRApp.configure()
         }
         
-        let settings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-        UIApplication.shared.registerUserNotificationSettings(settings)
         UIApplication.shared.registerForRemoteNotifications()
     }
 
@@ -49,6 +48,34 @@ open class NotificationsAddon: NSObject, Halo.NotificationsAddon {
     }
     
     public func didRegisterAddon(haloCore core: CoreManager) {
+        
+    }
+    
+    // MARK: Lifecycle
+    
+    public func applicationDidFinishLaunching(_ app: UIApplication, core: CoreManager) {
+        
+        if #available(iOS 10.0, *) {
+            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+            UNUserNotificationCenter.current().requestAuthorization(
+                options: authOptions,
+                completionHandler: {_, _ in })
+            
+            // For iOS 10 display notification (sent via APNS)
+            UNUserNotificationCenter.current().delegate = self
+            
+        } else {
+            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(settings)
+        }
+        
+    }
+    
+    public func applicationDidBecomeActive(_ app: UIApplication, core: CoreManager) {
+        
+    }
+    
+    public func applicationDidEnterBackground(_ app: UIApplication, core: CoreManager) {
         
     }
     
@@ -70,7 +97,7 @@ open class NotificationsAddon: NSObject, Halo.NotificationsAddon {
 
         self.completionHandler?(self, false)
     }
-
+    
     open func application(application app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 
         self.delegate?.haloApplication(app, didReceiveRemoteNotification: userInfo, userInteraction: user)
