@@ -66,7 +66,7 @@ open class NotificationsAddon: NSObject, Halo.NotificationsAddon, Halo.Lifecycle
             
         } else {
             let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            UIApplication.shared.registerUserNotificationSettings(settings)
+            app.registerUserNotificationSettings(settings)
         }
         
     }
