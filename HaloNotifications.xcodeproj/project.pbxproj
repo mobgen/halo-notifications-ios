@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		003516D81D1978050090CF28 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 003516D71D1978050090CF28 /* Halo.framework */; };
+		002EDD2F1DEDD8C20022F96D /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002EDD2E1DEDD8C20022F96D /* Halo.framework */; };
+		002EDD331DEED4BC0022F96D /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002EDD321DEED4BC0022F96D /* SwiftKeychainWrapper.framework */; };
 		003516E41D1978E40090CF28 /* Firebase.h in Headers */ = {isa = PBXBuildFile; fileRef = 003516E31D1978E40090CF28 /* Firebase.h */; };
 		004482F51DA4F8CF00715ACF /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004482F41DA4F8CF00715ACF /* FirebaseCore.framework */; };
 		007222001DCA46E300755045 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007221FF1DCA46E300755045 /* GoogleToolboxForMac.framework */; };
@@ -61,7 +62,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		003516D71D1978050090CF28 /* Halo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Halo.framework; path = Carthage/Build/iOS/Halo.framework; sourceTree = "<group>"; };
+		002EDD2E1DEDD8C20022F96D /* Halo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Halo.framework; path = "../../../Library/Developer/Xcode/DerivedData/HALO-amumgdtamfelfhbgrkxqyrllllnf/Build/Products/Debug-iphoneos/Halo.framework"; sourceTree = "<group>"; };
+		002EDD321DEED4BC0022F96D /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeychainWrapper.framework; path = Carthage/Build/iOS/SwiftKeychainWrapper.framework; sourceTree = "<group>"; };
 		003516E31D1978E40090CF28 /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		003516E51D1978ED0090CF28 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		004482F41DA4F8CF00715ACF /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = "<group>"; };
@@ -122,12 +124,13 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				003516D81D1978050090CF28 /* Halo.framework in Frameworks */,
+				002EDD2F1DEDD8C20022F96D /* Halo.framework in Frameworks */,
 				004482F51DA4F8CF00715ACF /* FirebaseCore.framework in Frameworks */,
 				00ABC4DF1D2BC40500893DB2 /* FirebaseInstanceID.framework in Frameworks */,
 				00ABC4E01D2BC40500893DB2 /* GoogleInterchangeUtilities.framework in Frameworks */,
 				00ABC4E11D2BC40500893DB2 /* GoogleSymbolUtilities.framework in Frameworks */,
 				00ABC4E31D2BC40500893DB2 /* FirebaseAnalytics.framework in Frameworks */,
+				002EDD331DEED4BC0022F96D /* SwiftKeychainWrapper.framework in Frameworks */,
 				00A409881D11A112005D4FB0 /* FirebaseMessaging.framework in Frameworks */,
 				007222001DCA46E300755045 /* GoogleToolboxForMac.framework in Frameworks */,
 			);
@@ -167,7 +170,8 @@
 		00A4097A1D11A0F8005D4FB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				003516D71D1978050090CF28 /* Halo.framework */,
+				002EDD321DEED4BC0022F96D /* SwiftKeychainWrapper.framework */,
+				002EDD2E1DEDD8C20022F96D /* Halo.framework */,
 				00A4097B1D11A112005D4FB0 /* Firebase */,
 			);
 			name = Frameworks;
