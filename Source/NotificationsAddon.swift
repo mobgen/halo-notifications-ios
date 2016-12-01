@@ -15,7 +15,7 @@ import FirebaseInstanceID
 
 @objc(HaloNotificationsAddon)
 open class NotificationsAddon: NSObject, Halo.NotificationsAddon, Halo.LifecycleAddon, UNUserNotificationCenterDelegate {
-
+    
     open var addonName = "Notifications"
     open var delegate: NotificationsDelegate?
 
@@ -53,7 +53,8 @@ open class NotificationsAddon: NSObject, Halo.NotificationsAddon, Halo.Lifecycle
     
     // MARK: Lifecycle
     
-    public func applicationDidFinishLaunching(_ app: UIApplication, core: CoreManager) {
+    @objc(applicationWillFinishLaunching:core:)
+    public func applicationWillFinishLaunching(_ app: UIApplication, core: CoreManager) -> Bool {
         
         if #available(iOS 10.0, *) {
             let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
@@ -69,6 +70,12 @@ open class NotificationsAddon: NSObject, Halo.NotificationsAddon, Halo.Lifecycle
             app.registerUserNotificationSettings(settings)
         }
         
+        return true
+    }
+    
+    @objc(applicationDidFinishLaunching:core:)
+    public func applicationDidFinishLaunching(_ app: UIApplication, core: CoreManager) -> Bool {
+        return true
     }
     
     public func applicationDidBecomeActive(_ app: UIApplication, core: CoreManager) {
