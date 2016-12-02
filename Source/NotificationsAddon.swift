@@ -73,8 +73,8 @@ open class NotificationsAddon: NSObject, Halo.NotificationsAddon, Halo.Lifecycle
         return true
     }
     
-    @objc(applicationDidFinishLaunching:core:)
-    public func applicationDidFinishLaunching(_ app: UIApplication, core: CoreManager) -> Bool {
+    @objc(applicationDidFinishLaunching:core:launchOptions:)
+    public func applicationDidFinishLaunching(_ app: UIApplication, core: CoreManager, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
         return true
     }
     
