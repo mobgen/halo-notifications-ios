@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		002EDD2F1DEDD8C20022F96D /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002EDD2E1DEDD8C20022F96D /* Halo.framework */; };
 		002EDD331DEED4BC0022F96D /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002EDD321DEED4BC0022F96D /* SwiftKeychainWrapper.framework */; };
 		003516E41D1978E40090CF28 /* Firebase.h in Headers */ = {isa = PBXBuildFile; fileRef = 003516E31D1978E40090CF28 /* Firebase.h */; };
 		004482F51DA4F8CF00715ACF /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004482F41DA4F8CF00715ACF /* FirebaseCore.framework */; };
@@ -20,6 +19,7 @@
 		00ABC4E31D2BC40500893DB2 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C32A171D1995B200FB96E4 /* FirebaseAnalytics.framework */; };
 		00B89FF71D19231700E117A5 /* NotificationsAddon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B89FF61D19231700E117A5 /* NotificationsAddon.swift */; };
 		00B89FFB1D194FEC00E117A5 /* NotificationsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */; };
+		00BE39101E23EB5F0006ED99 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00BE390F1E23EB5F0006ED99 /* Halo.framework */; };
 		00E9BA241D5510650020D327 /* adara.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9B9FC1D5510650020D327 /* adara.aiff */; };
 		00E9BA251D5510650020D327 /* alya.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9B9FD1D5510650020D327 /* alya.aiff */; };
 		00E9BA261D5510650020D327 /* antimony.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9B9FE1D5510650020D327 /* antimony.aiff */; };
@@ -63,7 +63,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		002EDD2E1DEDD8C20022F96D /* Halo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Halo.framework; path = "../../../Library/Developer/Xcode/DerivedData/HALO-amumgdtamfelfhbgrkxqyrllllnf/Build/Products/Debug-iphoneos/Halo.framework"; sourceTree = "<group>"; };
 		002EDD321DEED4BC0022F96D /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeychainWrapper.framework; path = Carthage/Build/iOS/SwiftKeychainWrapper.framework; sourceTree = "<group>"; };
 		003516E31D1978E40090CF28 /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		003516E51D1978ED0090CF28 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
@@ -75,6 +74,7 @@
 		00A4097F1D11A112005D4FB0 /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseMessaging.framework; sourceTree = "<group>"; };
 		00B89FF61D19231700E117A5 /* NotificationsAddon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsAddon.swift; sourceTree = "<group>"; };
 		00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsProtocols.swift; sourceTree = "<group>"; };
+		00BE390F1E23EB5F0006ED99 /* Halo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Halo.framework; path = Carthage/Build/iOS/Halo.framework; sourceTree = "<group>"; };
 		00C32A171D1995B200FB96E4 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
 		00C32A191D19962600FB96E4 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseInstanceID.framework; sourceTree = "<group>"; };
 		00C32A1A1D19962600FB96E4 /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
@@ -126,8 +126,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00BE39101E23EB5F0006ED99 /* Halo.framework in Frameworks */,
 				005271191DEF3F07005826B7 /* UserNotifications.framework in Frameworks */,
-				002EDD2F1DEDD8C20022F96D /* Halo.framework in Frameworks */,
 				004482F51DA4F8CF00715ACF /* FirebaseCore.framework in Frameworks */,
 				00ABC4DF1D2BC40500893DB2 /* FirebaseInstanceID.framework in Frameworks */,
 				00ABC4E01D2BC40500893DB2 /* GoogleInterchangeUtilities.framework in Frameworks */,
@@ -173,9 +173,9 @@
 		00A4097A1D11A0F8005D4FB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				00BE390F1E23EB5F0006ED99 /* Halo.framework */,
 				005271181DEF3F07005826B7 /* UserNotifications.framework */,
 				002EDD321DEED4BC0022F96D /* SwiftKeychainWrapper.framework */,
-				002EDD2E1DEDD8C20022F96D /* Halo.framework */,
 				00A4097B1D11A112005D4FB0 /* Firebase */,
 			);
 			name = Frameworks;
