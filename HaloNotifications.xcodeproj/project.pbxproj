@@ -666,6 +666,7 @@
 				006EDC8C1E12841900F583BC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		00A4095E1D119BAF005D4FB0 /* Build configuration list for PBXProject "HaloNotifications" */ = {
 			isa = XCConfigurationList;
