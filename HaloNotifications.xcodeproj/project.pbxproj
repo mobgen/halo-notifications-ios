@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		002EDD331DEED4BC0022F96D /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002EDD321DEED4BC0022F96D /* SwiftKeychainWrapper.framework */; };
 		003516E41D1978E40090CF28 /* Firebase.h in Headers */ = {isa = PBXBuildFile; fileRef = 003516E31D1978E40090CF28 /* Firebase.h */; };
 		004482F51DA4F8CF00715ACF /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 004482F41DA4F8CF00715ACF /* FirebaseCore.framework */; };
 		005271191DEF3F07005826B7 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005271181DEF3F07005826B7 /* UserNotifications.framework */; };
+		006EDC901E128CB500F583BC /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006EDC8F1E128CB500F583BC /* Halo.framework */; };
+		006EDC9A1E1297F800F583BC /* HaloNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A409641D119BAF005D4FB0 /* HaloNotifications.framework */; };
+		006EDC9B1E1297FB00F583BC /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006EDC8F1E128CB500F583BC /* Halo.framework */; };
+		006EDC9C1E1297FD00F583BC /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005271181DEF3F07005826B7 /* UserNotifications.framework */; };
 		007222001DCA46E300755045 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007221FF1DCA46E300755045 /* GoogleToolboxForMac.framework */; };
 		00A409881D11A112005D4FB0 /* FirebaseMessaging.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A4097F1D11A112005D4FB0 /* FirebaseMessaging.framework */; };
 		00ABC4DF1D2BC40500893DB2 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C32A191D19962600FB96E4 /* FirebaseInstanceID.framework */; };
@@ -19,7 +22,6 @@
 		00ABC4E31D2BC40500893DB2 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C32A171D1995B200FB96E4 /* FirebaseAnalytics.framework */; };
 		00B89FF71D19231700E117A5 /* NotificationsAddon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B89FF61D19231700E117A5 /* NotificationsAddon.swift */; };
 		00B89FFB1D194FEC00E117A5 /* NotificationsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */; };
-		00BE39101E23EB5F0006ED99 /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00BE390F1E23EB5F0006ED99 /* Halo.framework */; };
 		00E9BA241D5510650020D327 /* adara.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9B9FC1D5510650020D327 /* adara.aiff */; };
 		00E9BA251D5510650020D327 /* alya.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9B9FD1D5510650020D327 /* alya.aiff */; };
 		00E9BA261D5510650020D327 /* antimony.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9B9FE1D5510650020D327 /* antimony.aiff */; };
@@ -62,19 +64,30 @@
 		00E9BA4B1D5510650020D327 /* voila.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA231D5510650020D327 /* voila.aiff */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		006EDC891E12841900F583BC /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00A4095B1D119BAF005D4FB0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 00A409631D119BAF005D4FB0;
+			remoteInfo = HaloNotifications;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		002EDD321DEED4BC0022F96D /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeychainWrapper.framework; path = Carthage/Build/iOS/SwiftKeychainWrapper.framework; sourceTree = "<group>"; };
 		003516E31D1978E40090CF28 /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		003516E51D1978ED0090CF28 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		004482F41DA4F8CF00715ACF /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = "<group>"; };
 		005271181DEF3F07005826B7 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		006EDC831E12841900F583BC /* HaloNotificationsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HaloNotificationsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		006EDC871E12841900F583BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		006EDC8F1E128CB500F583BC /* Halo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Halo.framework; path = Carthage/Build/iOS/Halo.framework; sourceTree = "<group>"; };
 		007221FF1DCA46E300755045 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleToolboxForMac.framework; sourceTree = "<group>"; };
 		00A409641D119BAF005D4FB0 /* HaloNotifications.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = HaloNotifications.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		00A409771D11A019005D4FB0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00A4097F1D11A112005D4FB0 /* FirebaseMessaging.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseMessaging.framework; sourceTree = "<group>"; };
 		00B89FF61D19231700E117A5 /* NotificationsAddon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsAddon.swift; sourceTree = "<group>"; };
 		00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsProtocols.swift; sourceTree = "<group>"; };
-		00BE390F1E23EB5F0006ED99 /* Halo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Halo.framework; path = Carthage/Build/iOS/Halo.framework; sourceTree = "<group>"; };
 		00C32A171D1995B200FB96E4 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
 		00C32A191D19962600FB96E4 /* FirebaseInstanceID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseInstanceID.framework; sourceTree = "<group>"; };
 		00C32A1A1D19962600FB96E4 /* GoogleInterchangeUtilities.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleInterchangeUtilities.framework; sourceTree = "<group>"; };
@@ -122,18 +135,27 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		006EDC801E12841900F583BC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				006EDC9A1E1297F800F583BC /* HaloNotifications.framework in Frameworks */,
+				006EDC9B1E1297FB00F583BC /* Halo.framework in Frameworks */,
+				006EDC9C1E1297FD00F583BC /* UserNotifications.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		00A409601D119BAF005D4FB0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				00BE39101E23EB5F0006ED99 /* Halo.framework in Frameworks */,
 				005271191DEF3F07005826B7 /* UserNotifications.framework in Frameworks */,
 				004482F51DA4F8CF00715ACF /* FirebaseCore.framework in Frameworks */,
+				006EDC901E128CB500F583BC /* Halo.framework in Frameworks */,
 				00ABC4DF1D2BC40500893DB2 /* FirebaseInstanceID.framework in Frameworks */,
 				00ABC4E01D2BC40500893DB2 /* GoogleInterchangeUtilities.framework in Frameworks */,
 				00ABC4E11D2BC40500893DB2 /* GoogleSymbolUtilities.framework in Frameworks */,
 				00ABC4E31D2BC40500893DB2 /* FirebaseAnalytics.framework in Frameworks */,
-				002EDD331DEED4BC0022F96D /* SwiftKeychainWrapper.framework in Frameworks */,
 				00A409881D11A112005D4FB0 /* FirebaseMessaging.framework in Frameworks */,
 				007222001DCA46E300755045 /* GoogleToolboxForMac.framework in Frameworks */,
 			);
@@ -142,9 +164,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		006EDC841E12841900F583BC /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				006EDC871E12841900F583BC /* Info.plist */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
 		00A4095A1D119BAF005D4FB0 = {
 			isa = PBXGroup;
 			children = (
+				006EDC841E12841900F583BC /* Tests */,
 				00A4097A1D11A0F8005D4FB0 /* Frameworks */,
 				00A409651D119BAF005D4FB0 /* Products */,
 				00E9B9FB1D5510650020D327 /* Sounds */,
@@ -157,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				00A409641D119BAF005D4FB0 /* HaloNotifications.framework */,
+				006EDC831E12841900F583BC /* HaloNotificationsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -173,9 +205,8 @@
 		00A4097A1D11A0F8005D4FB0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				00BE390F1E23EB5F0006ED99 /* Halo.framework */,
+				006EDC8F1E128CB500F583BC /* Halo.framework */,
 				005271181DEF3F07005826B7 /* UserNotifications.framework */,
-				002EDD321DEED4BC0022F96D /* SwiftKeychainWrapper.framework */,
 				00A4097B1D11A112005D4FB0 /* Firebase */,
 			);
 			name = Frameworks;
@@ -267,6 +298,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		006EDC821E12841900F583BC /* HaloNotificationsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 006EDC8D1E12841900F583BC /* Build configuration list for PBXNativeTarget "HaloNotificationsTests" */;
+			buildPhases = (
+				006EDC7F1E12841900F583BC /* Sources */,
+				006EDC801E12841900F583BC /* Frameworks */,
+				006EDC811E12841900F583BC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				006EDC8A1E12841900F583BC /* PBXTargetDependency */,
+			);
+			name = HaloNotificationsTests;
+			productName = HaloNotificationsTests;
+			productReference = 006EDC831E12841900F583BC /* HaloNotificationsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		00A409631D119BAF005D4FB0 /* HaloNotifications */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00A4096C1D119BAF005D4FB0 /* Build configuration list for PBXNativeTarget "HaloNotifications" */;
@@ -291,9 +340,15 @@
 		00A4095B1D119BAF005D4FB0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Mobgen Technology";
 				TargetAttributes = {
+					006EDC821E12841900F583BC = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 4DWNK4MCTP;
+						ProvisioningStyle = Automatic;
+					};
 					00A409631D119BAF005D4FB0 = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0800;
@@ -313,11 +368,19 @@
 			projectRoot = "";
 			targets = (
 				00A409631D119BAF005D4FB0 /* HaloNotifications */,
+				006EDC821E12841900F583BC /* HaloNotificationsTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		006EDC811E12841900F583BC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		00A409621D119BAF005D4FB0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -368,6 +431,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		006EDC7F1E12841900F583BC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		00A4095F1D119BAF005D4FB0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -379,7 +449,54 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		006EDC8A1E12841900F583BC /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 00A409631D119BAF005D4FB0 /* HaloNotifications */;
+			targetProxy = 006EDC891E12841900F583BC /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		006EDC8B1E12841900F583BC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = 4DWNK4MCTP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloNotificationsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		006EDC8C1E12841900F583BC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = 4DWNK4MCTP;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
+				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloNotificationsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 		00A4096A1D119BAF005D4FB0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -542,6 +659,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		006EDC8D1E12841900F583BC /* Build configuration list for PBXNativeTarget "HaloNotificationsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				006EDC8B1E12841900F583BC /* Debug */,
+				006EDC8C1E12841900F583BC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		00A4095E1D119BAF005D4FB0 /* Build configuration list for PBXProject "HaloNotifications" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
