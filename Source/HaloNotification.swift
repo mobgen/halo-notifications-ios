@@ -31,6 +31,7 @@ public class HaloNotification: NSObject {
     public internal(set) var icon: String?
     public internal(set) var sound: String?
     public internal(set) var type: HaloNotificationType
+    public internal(set) var payload: [AnyHashable: Any]
     
     init(userInfo: [AnyHashable: Any]) {
         
@@ -40,6 +41,7 @@ public class HaloNotification: NSObject {
         sound = userInfo[Keys.Sound] as? String
         icon = userInfo[Keys.Icon] as? String
         type = .normal
+        payload = userInfo
         
         if let contentAvailable = userInfo["content_available"] as? Int, contentAvailable == 1 {
             type = .silent
