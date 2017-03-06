@@ -37,18 +37,27 @@ public class HaloNotification: NSObject {
         scheduleId = userInfo[Keys.ScheduleId] as? String
         title = userInfo[Keys.Title] as? String
         body = userInfo[Keys.Body] as? String
-        icon = userInfo[Keys.Icon] as? String
         sound = userInfo[Keys.Sound] as? String
+        icon = userInfo[Keys.Icon] as? String
         type = .normal
         
         if let contentAvailable = userInfo["content_available"] as? Int, contentAvailable == 1 {
             type = .silent
+            
         } else if let notifType = userInfo[Keys.NotificationType] as? String {
             switch notifType.lowercased() {
                 case "2_factor":
                 type = .twoFactor
                 default:
                 break
+            }
+        }
+        
+        if type == .normal {
+            if let aps = userInfo["aps"] as? [AnyHashable: Any], let alert = aps["alert"] as? [AnyHashable: Any] {
+                title = alert[Keys.Title] as? String
+                body = alert[Keys.Body] as? String
+                sound = aps[Keys.Sound] as? String
             }
         }
         
