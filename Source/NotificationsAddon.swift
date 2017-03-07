@@ -16,8 +16,9 @@ import FirebaseInstanceID
 @objc(HaloNotificationsAddon)
 open class NotificationsAddon: NSObject, Halo.NotificationsAddon, Halo.LifecycleAddon, UNUserNotificationCenterDelegate {
     
-    open var addonName = "Notifications"
-    open var delegate: NotificationsDelegate?
+    public var addonName = "Notifications"
+    public var delegate: NotificationsDelegate?
+    public var twoFactorDelegate: TwoFactorAuthenticationDelegate?
 
     fileprivate var completionHandler: ((Addon, Bool) -> Void)?
     open var token: String?
@@ -108,7 +109,16 @@ open class NotificationsAddon: NSObject, Halo.NotificationsAddon, Halo.Lifecycle
     open func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 
         let notification = HaloNotification(userInfo: userInfo)
-        self.delegate?.haloApplication(app, didReceiveRemoteNotification: notification, userInteraction: user, fetchCompletionHandler: completionHandler)
+        
+        if notification.type == .twoFactor {
+            if let code = notification.payload["code"] as? String {
+                self.twoFactorDelegate?.application(app, didReceiveTwoFactorAuthCode: code, remoteNotification: notification)
+            } else {
+                Halo.Manager.core.logMessage("No 'code' field was found within the payload", level: .error)
+            }
+        }
+        
+        self.delegate?.application(app, didReceiveRemoteNotification: notification, userInteraction: user, fetchCompletionHandler: completionHandler)
     }
 
     @objc

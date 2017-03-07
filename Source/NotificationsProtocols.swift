@@ -19,7 +19,13 @@ public protocol NotificationsDelegate {
      - parameter userInfo:          Dictionary containing information about the push notification
      - parameter userInteraction:   Whether the execution of this delegate has been triggered by a user action or not
      */
-    func haloApplication(_ application: UIApplication, didReceiveRemoteNotification notification: HaloNotification, userInteraction user: Bool, fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
+    func application(_ app: UIApplication, didReceiveRemoteNotification notification: HaloNotification, userInteraction user: Bool, fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
     
+}
+
+@objc(HaloTwoFactorAuthenticationDelegate)
+public protocol TwoFactorAuthenticationDelegate {
+    
+    func application(_ app: UIApplication, didReceiveTwoFactorAuthCode code: String, remoteNotification notification: HaloNotification) -> Void
     
 }
