@@ -12,13 +12,14 @@ import UIKit
 /// Delegate to be implemented to handle push notifications easily
 @objc(HaloNotificationsDelegate)
 public protocol NotificationsDelegate {
-    /**
-     This handler will be called when any push notification is received (silent or not)
-
-     - parameter application:       Application receiving the push notification
-     - parameter userInfo:          Dictionary containing information about the push notification
-     - parameter userInteraction:   Whether the execution of this delegate has been triggered by a user action or not
-     */
+    
+    /// This handler will be called when any push notification is received (silent or not)
+    ///
+    /// - Parameters:
+    ///   - app: Application receiving the push notification
+    ///   - notification: Object containing information about the push notification
+    ///   - user: Whether the execution of this delegate has been triggered by a user action or not
+    ///   - completionHandler: Handler to be executed for silent notifications (to
     func application(_ app: UIApplication, didReceiveRemoteNotification notification: HaloNotification, userInteraction user: Bool, fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
     
 }
@@ -26,6 +27,12 @@ public protocol NotificationsDelegate {
 @objc(HaloTwoFactorAuthenticationDelegate)
 public protocol TwoFactorAuthenticationDelegate {
     
+    /// This handler will be called when a push notification coming from the 2-factor authentication process is received
+    ///
+    /// - Parameters:
+    ///   - app: Application receiving the push notification
+    ///   - code: Code provided by the server to complete the authentication process
+    ///   - notification: Object containing information about the push notification
     func application(_ app: UIApplication, didReceiveTwoFactorAuthCode code: String, remoteNotification notification: HaloNotification) -> Void
     
 }
