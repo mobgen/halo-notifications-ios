@@ -62,6 +62,7 @@
 		00E9BA491D5510650020D327 /* tethys.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA211D5510650020D327 /* tethys.aiff */; };
 		00E9BA4A1D5510650020D327 /* upsilon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA221D5510650020D327 /* upsilon.aiff */; };
 		00E9BA4B1D5510650020D327 /* voila.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA231D5510650020D327 /* voila.aiff */; };
+		2846F40C1E6D6811009DFA3D /* HaloNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846F40B1E6D6811009DFA3D /* HaloNotification.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -132,6 +133,7 @@
 		00E9BA211D5510650020D327 /* tethys.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = tethys.aiff; sourceTree = "<group>"; };
 		00E9BA221D5510650020D327 /* upsilon.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = upsilon.aiff; sourceTree = "<group>"; };
 		00E9BA231D5510650020D327 /* voila.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = voila.aiff; sourceTree = "<group>"; };
+		2846F40B1E6D6811009DFA3D /* HaloNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloNotification.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -198,6 +200,7 @@
 			children = (
 				00B89FF61D19231700E117A5 /* NotificationsAddon.swift */,
 				00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */,
+				2846F40B1E6D6811009DFA3D /* HaloNotification.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -444,6 +447,7 @@
 			files = (
 				00B89FFB1D194FEC00E117A5 /* NotificationsProtocols.swift in Sources */,
 				00B89FF71D19231700E117A5 /* NotificationsAddon.swift in Sources */,
+				2846F40C1E6D6811009DFA3D /* HaloNotification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
