@@ -19,7 +19,7 @@ public protocol NotificationsDelegate {
      - parameter userInfo:          Dictionary containing information about the push notification
      - parameter userInteraction:   Whether the execution of this delegate has been triggered by a user action or not
      */
-    func haloApplication(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], userInteraction user: Bool) -> Void
+    func haloApplication(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) -> Void
 
     /**
      This handler will be called when a silent push notification is received
@@ -37,6 +37,6 @@ public protocol NotificationsDelegate {
      - parameter userInfo:          Dictionary containing information about the push notification
      - parameter userInteraction:   Whether the execution of this delegate has been triggered by a user action or not
      */
-    func haloApplication(_ application: UIApplication, didReceiveNotification userInfo: [AnyHashable: Any], userInteraction user: Bool) -> Void
+    func haloApplication(_ application: UIApplication, didReceiveNotification userInfo: [AnyHashable: Any]) -> Void
     
 }
