@@ -56,6 +56,14 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
         
     }
     
+    public func registerApplicationForNotifications() {
+        if #available(iOS 10.0, *) {
+            registerApplicationForNotificationsWithAuthOptions()
+        } else {
+            registerApplicationForNotificationsWithSettings()
+        }
+    }
+    
     @available(iOS 10.0, *)
     public func registerApplicationForNotificationsWithAuthOptions(
         _ app: UIApplication = UIApplication.shared,
@@ -85,14 +93,10 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
         if #available(iOS 10.0, *) {
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
+        }
         
-            if self.autoRegister {
-                registerApplicationForNotificationsWithAuthOptions()
-            }
-        } else {
-            if self.autoRegister {
-                registerApplicationForNotificationsWithSettings()
-            }
+        if self.autoRegister {
+            registerApplicationForNotifications()
         }
 
         return true
