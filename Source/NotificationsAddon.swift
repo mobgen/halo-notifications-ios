@@ -14,34 +14,38 @@ import Firebase
 import FirebaseInstanceID
 
 @objc(HaloNotificationsAddon)
-open class NotificationsAddon: NSObject, Halo.NotificationsAddon, Halo.LifecycleAddon, UNUserNotificationCenterDelegate {
+open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAddon, UNUserNotificationCenterDelegate {
     
     public var addonName = "Notifications"
     public var delegate: NotificationsDelegate?
     public var twoFactorDelegate: TwoFactorAuthenticationDelegate?
 
-    fileprivate var completionHandler: ((Addon, Bool) -> Void)?
+    fileprivate var autoRegister: Bool = true
     open var token: String?
 
     /// Token used to make sure the startup process is done only once
     fileprivate var once_token: Int = 0
     
+    public init(autoRegister auto: Bool = true) {
+        super.init()
+        self.autoRegister = auto
+    }
+    
     // MARK: Addon lifecycle
 
-    open func setup(haloCore core: CoreManager, completionHandler handler: ((Addon, Bool) -> Void)? = nil) {
+    open func setup(haloCore core: CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)? = nil) {
         // Add observer to listen for the token refresh notification.
         NotificationCenter.default.addObserver(self, selector: #selector(NotificationsAddon.onTokenRefresh), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
         handler?(self, true)
     }
 
-    open func startup(haloCore core: CoreManager, completionHandler handler: ((Addon, Bool) -> Void)? = nil) {
-        self.completionHandler = handler
-
+    open func startup(haloCore core: CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)? = nil) {
+        
         if FIRApp.defaultApp() == nil {
             FIRApp.configure()
         }
-        
-        UIApplication.shared.registerForRemoteNotifications()
+
+        handler?(self, true)
     }
 
     public func willRegisterAddon(haloCore core: CoreManager) {
@@ -52,25 +56,49 @@ open class NotificationsAddon: NSObject, Halo.NotificationsAddon, Halo.Lifecycle
         
     }
     
+    public func registerApplicationForNotifications() {
+        if #available(iOS 10.0, *) {
+            registerApplicationForNotificationsWithAuthOptions()
+        } else {
+            registerApplicationForNotificationsWithSettings()
+        }
+    }
+    
+    @available(iOS 10.0, *)
+    public func registerApplicationForNotificationsWithAuthOptions(
+        _ app: UIApplication = UIApplication.shared,
+        authOptions options: UNAuthorizationOptions = [.alert, .badge, .sound]) -> Void {
+        
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: options,
+            completionHandler: {_, _ in })
+        
+        app.registerForRemoteNotifications()
+    }
+    
+    public func registerApplicationForNotificationsWithSettings(
+        _ app: UIApplication = UIApplication.shared,
+        notificationSettings settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)) -> Void {
+        
+        app.registerUserNotificationSettings(settings)
+        
+        app.registerForRemoteNotifications()
+    }
+    
     // MARK: Lifecycle
     
     @objc(applicationWillFinishLaunching:core:)
     public func applicationWillFinishLaunching(_ app: UIApplication, core: CoreManager) -> Bool {
         
         if #available(iOS 10.0, *) {
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: {_, _ in })
-            
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
-            
-        } else {
-            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            app.registerUserNotificationSettings(settings)
         }
         
+        if self.autoRegister {
+            registerApplicationForNotifications()
+        }
+
         return true
     }
     
@@ -88,22 +116,23 @@ open class NotificationsAddon: NSObject, Halo.NotificationsAddon, Halo.Lifecycle
     }
     
     // MARK: Notifications
-
+    
     open func application(_ app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: CoreManager) {
 
-        if let device = Halo.Manager.core.device, let token = FIRInstanceID.instanceID().token() {
+        if let device = Halo.Manager.core.device,
+            let token = FIRInstanceID.instanceID().token() {
+            
             device.info = DeviceInfo(platform: "ios", token: token)
             Halo.Manager.core.saveDevice { _ in
-                self.completionHandler?(self, true)
+                core.logMessage("Successfully registered for remote notifications with Firebase token: \(token)", level: .info)
             }
         } else {
-            self.completionHandler?(self, true)
+            core.logMessage("Error registering for remote notifications. No Firebase token available", level: .error)
         }
     }
 
     open func application(_ app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: CoreManager) {
-
-        self.completionHandler?(self, false)
+        core.logMessage("Error registering for remote notifications. \(error.localizedDescription)", level: .error)
     }
     
     open func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
