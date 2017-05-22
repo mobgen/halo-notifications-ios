@@ -46,8 +46,7 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
         if FIRApp.defaultApp() == nil {
             FIRApp.configure()
         }
-        
-        UIApplication.shared.registerForRemoteNotifications()
+
     }
 
     public func willRegisterAddon(haloCore core: CoreManager) {
@@ -66,6 +65,8 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
         UNUserNotificationCenter.current().requestAuthorization(
             options: options,
             completionHandler: {_, _ in })
+        
+        app.registerForRemoteNotifications()
     }
     
     public func registerApplicationForNotificationsWithSettings(
@@ -73,6 +74,8 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
         notificationSettings settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)) -> Void {
         
         app.registerUserNotificationSettings(settings)
+        
+        app.registerForRemoteNotifications()
     }
     
     // MARK: Lifecycle
