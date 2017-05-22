@@ -22,6 +22,9 @@ public protocol NotificationsDelegate {
     ///   - completionHandler: Handler to be executed for silent notifications (to
     func application(_ app: UIApplication, didReceiveRemoteNotification notification: HaloNotification, userInteraction user: Bool, fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
     
+    func application(_ app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: String) -> Void
+    
+    func application(_ app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) -> Void
 }
 
 @objc(HaloTwoFactorAuthenticationDelegate)

@@ -21,7 +21,6 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
     public var twoFactorDelegate: TwoFactorAuthenticationDelegate?
 
     fileprivate var autoRegister: Bool = true
-    fileprivate var completionHandler: ((HaloAddon, Bool) -> Void)?
     open var token: String?
 
     /// Token used to make sure the startup process is done only once
@@ -41,12 +40,12 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
     }
 
     open func startup(haloCore core: CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)? = nil) {
-        self.completionHandler = handler
-
+        
         if FIRApp.defaultApp() == nil {
             FIRApp.configure()
         }
 
+        handler?(self, true)
     }
 
     public func willRegisterAddon(haloCore core: CoreManager) {
@@ -113,22 +112,23 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
     }
     
     // MARK: Notifications
-
+    
     open func application(_ app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: CoreManager) {
 
-        if let device = Halo.Manager.core.device, let token = FIRInstanceID.instanceID().token() {
+        if let device = Halo.Manager.core.device,
+            let token = FIRInstanceID.instanceID().token() {
+            
             device.info = DeviceInfo(platform: "ios", token: token)
             Halo.Manager.core.saveDevice { _ in
-                self.completionHandler?(self, true)
+                self.delegate?.application(app, didRegisterForRemoteNotificationsWithDeviceToken: token)
             }
         } else {
-            self.completionHandler?(self, true)
+            self.delegate?.application(app, didFailToRegisterForRemoteNotificationsWithError: NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil))
         }
     }
 
     open func application(_ app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: CoreManager) {
-
-        self.completionHandler?(self, false)
+        delegate?.application(app, didFailToRegisterForRemoteNotificationsWithError: error)
     }
     
     open func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
