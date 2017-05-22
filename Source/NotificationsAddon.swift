@@ -120,7 +120,7 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
             
             device.info = DeviceInfo(platform: "ios", token: token)
             Halo.Manager.core.saveDevice { _ in
-                core.logMessage("Successfully registered for remote notifications with token: \(token)", level: .info)
+                core.logMessage("Successfully registered for remote notifications with Firebase token: \(token)", level: .info)
             }
         } else {
             core.logMessage("Error registering for remote notifications. No Firebase token available", level: .error)
