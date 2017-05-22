@@ -120,15 +120,15 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
             
             device.info = DeviceInfo(platform: "ios", token: token)
             Halo.Manager.core.saveDevice { _ in
-                self.delegate?.application(app, didRegisterForRemoteNotificationsWithDeviceToken: token)
+                core.logMessage("Successfully registered for remote notifications with token: \(token)", level: .info)
             }
         } else {
-            self.delegate?.application(app, didFailToRegisterForRemoteNotificationsWithError: NSError(domain: "com.mobgen.halo", code: -1, userInfo: nil))
+            core.logMessage("Error registering for remote notifications. No Firebase token available", level: .error)
         }
     }
 
     open func application(_ app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: CoreManager) {
-        delegate?.application(app, didFailToRegisterForRemoteNotificationsWithError: error)
+        core.logMessage("Error registering for remote notifications. \(error.localizedDescription)", level: .error)
     }
     
     open func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
