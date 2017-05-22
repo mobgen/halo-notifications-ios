@@ -20,11 +20,17 @@ open class NotificationsAddon: NSObject, Halo.NotificationsAddon, Halo.Lifecycle
     public var delegate: NotificationsDelegate?
     public var twoFactorDelegate: TwoFactorAuthenticationDelegate?
 
+    fileprivate var autoRegister: Bool = true
     fileprivate var completionHandler: ((Addon, Bool) -> Void)?
     open var token: String?
 
     /// Token used to make sure the startup process is done only once
     fileprivate var once_token: Int = 0
+    
+    public init(autoRegister auto: Bool = true) {
+        super.init()
+        self.autoRegister = auto
+    }
     
     // MARK: Addon lifecycle
 
@@ -52,25 +58,41 @@ open class NotificationsAddon: NSObject, Halo.NotificationsAddon, Halo.Lifecycle
         
     }
     
+    @available(iOS 10.0, *)
+    public func registerApplicationForNotificationsWithAuthOptions(
+        _ app: UIApplication = UIApplication.shared,
+        authOptions options: UNAuthorizationOptions = [.alert, .badge, .sound]) -> Void {
+        
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: options,
+            completionHandler: {_, _ in })
+    }
+    
+    public func registerApplicationForNotificationsWithSettings(
+        _ app: UIApplication = UIApplication.shared,
+        notificationSettings settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)) -> Void {
+        
+        app.registerUserNotificationSettings(settings)
+    }
+    
     // MARK: Lifecycle
     
     @objc(applicationWillFinishLaunching:core:)
     public func applicationWillFinishLaunching(_ app: UIApplication, core: CoreManager) -> Bool {
         
         if #available(iOS 10.0, *) {
-            let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-            UNUserNotificationCenter.current().requestAuthorization(
-                options: authOptions,
-                completionHandler: {_, _ in })
-            
             // For iOS 10 display notification (sent via APNS)
             UNUserNotificationCenter.current().delegate = self
-            
-        } else {
-            let settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-            app.registerUserNotificationSettings(settings)
-        }
         
+            if self.autoRegister {
+                registerApplicationForNotificationsWithAuthOptions()
+            }
+        } else {
+            if self.autoRegister {
+                registerApplicationForNotificationsWithSettings()
+            }
+        }
+
         return true
     }
     
