@@ -14,14 +14,14 @@ import Firebase
 import FirebaseInstanceID
 
 @objc(HaloNotificationsAddon)
-open class NotificationsAddon: NSObject, Halo.NotificationsAddon, Halo.LifecycleAddon, UNUserNotificationCenterDelegate {
+open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAddon, UNUserNotificationCenterDelegate {
     
     public var addonName = "Notifications"
     public var delegate: NotificationsDelegate?
     public var twoFactorDelegate: TwoFactorAuthenticationDelegate?
 
     fileprivate var autoRegister: Bool = true
-    fileprivate var completionHandler: ((Addon, Bool) -> Void)?
+    fileprivate var completionHandler: ((HaloAddon, Bool) -> Void)?
     open var token: String?
 
     /// Token used to make sure the startup process is done only once
@@ -34,13 +34,13 @@ open class NotificationsAddon: NSObject, Halo.NotificationsAddon, Halo.Lifecycle
     
     // MARK: Addon lifecycle
 
-    open func setup(haloCore core: CoreManager, completionHandler handler: ((Addon, Bool) -> Void)? = nil) {
+    open func setup(haloCore core: CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)? = nil) {
         // Add observer to listen for the token refresh notification.
         NotificationCenter.default.addObserver(self, selector: #selector(NotificationsAddon.onTokenRefresh), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
         handler?(self, true)
     }
 
-    open func startup(haloCore core: CoreManager, completionHandler handler: ((Addon, Bool) -> Void)? = nil) {
+    open func startup(haloCore core: CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)? = nil) {
         self.completionHandler = handler
 
         if FIRApp.defaultApp() == nil {
