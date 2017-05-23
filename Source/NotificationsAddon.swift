@@ -35,14 +35,14 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
 
     open func setup(haloCore core: CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)? = nil) {
         // Add observer to listen for the token refresh notification.
-        NotificationCenter.default.addObserver(self, selector: #selector(NotificationsAddon.onTokenRefresh), name: NSNotification.Name.firInstanceIDTokenRefresh, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(NotificationsAddon.onTokenRefresh), name: NSNotification.Name.InstanceIDTokenRefresh, object: nil)
         handler?(self, true)
     }
 
     open func startup(haloCore core: CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)? = nil) {
         
-        if FIRApp.defaultApp() == nil {
-            FIRApp.configure()
+        if FirebaseApp.app() == nil {
+            FirebaseApp.configure()
         }
 
         handler?(self, true)
@@ -120,7 +120,7 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
     open func application(_ app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: CoreManager) {
 
         if let device = Halo.Manager.core.device,
-            let token = FIRInstanceID.instanceID().token() {
+            let token = InstanceID.instanceID().token() {
             
             device.info = DeviceInfo(platform: "ios", token: token)
             Halo.Manager.core.saveDevice { _ in
@@ -153,7 +153,7 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
     @objc
     fileprivate func onTokenRefresh() -> Void {
 
-        if let device = Halo.Manager.core.device, let token = FIRInstanceID.instanceID().token() {
+        if let device = Halo.Manager.core.device, let token = InstanceID.instanceID().token() {
             device.info = DeviceInfo(platform: "ios", token: token)
             Halo.Manager.core.saveDevice()
         }
