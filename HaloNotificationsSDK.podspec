@@ -6,16 +6,17 @@ Pod::Spec.new do |spec|
   spec.homepage         = 'https://mobgen.github.io/halo-documentation/ios_home.html'
   spec.license          = 'Apache License, Version 2.0'
   spec.author           = { 'Borja Santos-Diez' => 'borja.santos@mobgen.com' }
-  spec.source           = { :git => 'https://github.com/mobgen/halo-notifications-ios.git', :tag => '2.3.0' }
+  spec.source           = { :http => 'https://github.com/mobgen/halo-notifications-ios/archive/2.3.0.zip' }
 
   spec.platforms        = { :ios => '8.0' }
   spec.requires_arc     = true
+  spec.ios.framework    = 'UserNotifications'
+  spec.ios.vendored_frameworks = 'halo-notifications-ios-2.3.0/Frameworks/Firebase/**/*.framework'
+  spec.ios.vendored_libraries = 
 
-  spec.source_files     = 'Source/**/*.swift'
-  spec.resources        = ['Sounds/*'] 
- 
+  spec.source_files     = 'halo-notifications-ios-2.3.0/Source/**/*.swift'
+  spec.resources        = ['halo-notifications-ios-2.3.0/Sounds/*'] 
+
   spec.dependency 'HaloSDK'
-  spec.dependency 'Firebase/Analytics'
-  spec.dependency 'Firebase/Messaging'
 
 end
