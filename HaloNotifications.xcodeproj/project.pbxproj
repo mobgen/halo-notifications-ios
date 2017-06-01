@@ -192,7 +192,6 @@
 			isa = PBXGroup;
 			children = (
 				006EDC841E12841900F583BC /* Tests */,
-				284FEEC51EDFFF680048E664 /* HaloNotificationsServiceExtension */,
 				00A4097A1D11A0F8005D4FB0 /* Frameworks */,
 				00A409651D119BAF005D4FB0 /* Products */,
 				00E9B9FB1D5510650020D327 /* Sounds */,
@@ -214,6 +213,7 @@
 		00A409751D11A019005D4FB0 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				284FEEC51EDFFF680048E664 /* NotificationsServiceExtension */,
 				00B89FF61D19231700E117A5 /* NotificationsAddon.swift */,
 				00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */,
 				2846F40B1E6D6811009DFA3D /* HaloNotification.swift */,
@@ -298,14 +298,14 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
-		284FEEC51EDFFF680048E664 /* HaloNotificationsServiceExtension */ = {
+		284FEEC51EDFFF680048E664 /* NotificationsServiceExtension */ = {
 			isa = PBXGroup;
 			children = (
 				284FEEC61EDFFF680048E664 /* NotificationService.swift */,
 				284FEEC81EDFFF680048E664 /* Info.plist */,
 			);
-			name = HaloNotificationsServiceExtension;
-			path = HaloRichNotifications;
+			name = NotificationsServiceExtension;
+			path = ../HaloRichNotifications;
 			sourceTree = "<group>";
 		};
 		28C6051B1ED437EE001D310E /* Analytics */ = {
