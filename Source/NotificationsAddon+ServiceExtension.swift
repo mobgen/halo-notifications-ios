@@ -11,8 +11,8 @@ import UserNotifications
 @available(iOS 10.0, *)
 extension NotificationsAddon {
     
-    public func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
-        
+public func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
+    
         if let bestAttemptContent = request.content.mutableCopy() as? UNMutableNotificationContent,
             let data = request.content.userInfo["data"] as? [String: Any],
             let image = data["image"] as? [String: String],
@@ -28,10 +28,12 @@ extension NotificationsAddon {
         }
     }
     
-    public func serviceExtensionTimeWillExpire() {
+    public func serviceExtensionTimeWillExpire(bestAttemptContent: UNMutableNotificationContent?, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) -> Void {
         // Called just before the extension will be terminated by the system.
         // Use this as an opportunity to deliver your "best attempt" at modified content, otherwise the original push payload will be used.
-        
+        if let bestAttemptContent =  bestAttemptContent {
+            contentHandler(bestAttemptContent)
+        }
     }
     
 }
