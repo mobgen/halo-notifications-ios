@@ -15,7 +15,6 @@
 		00B89FF71D19231700E117A5 /* NotificationsAddon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B89FF61D19231700E117A5 /* NotificationsAddon.swift */; };
 		00B89FFB1D194FEC00E117A5 /* NotificationsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */; };
 		2846F40C1E6D6811009DFA3D /* HaloNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846F40B1E6D6811009DFA3D /* HaloNotification.swift */; };
-		284FEEF11EE026A90048E664 /* NotificationsAddon+ServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284FEEF01EE026A80048E664 /* NotificationsAddon+ServiceExtension.swift */; };
 		28B86DA61EE0635E0067CC1D /* adara.caf in Resources */ = {isa = PBXBuildFile; fileRef = 28B86D561EE0631B0067CC1D /* adara.caf */; };
 		28B86DA71EE0635E0067CC1D /* alya.caf in Resources */ = {isa = PBXBuildFile; fileRef = 28B86D571EE0631B0067CC1D /* alya.caf */; };
 		28B86DA81EE0635E0067CC1D /* antimony.caf in Resources */ = {isa = PBXBuildFile; fileRef = 28B86D581EE0631B0067CC1D /* antimony.caf */; };
@@ -87,7 +86,6 @@
 		00B89FF61D19231700E117A5 /* NotificationsAddon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsAddon.swift; sourceTree = "<group>"; };
 		00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsProtocols.swift; sourceTree = "<group>"; };
 		2846F40B1E6D6811009DFA3D /* HaloNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloNotification.swift; sourceTree = "<group>"; };
-		284FEEF01EE026A80048E664 /* NotificationsAddon+ServiceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NotificationsAddon+ServiceExtension.swift"; sourceTree = "<group>"; };
 		28B86D561EE0631B0067CC1D /* adara.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = adara.caf; sourceTree = "<group>"; };
 		28B86D571EE0631B0067CC1D /* alya.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = alya.caf; sourceTree = "<group>"; };
 		28B86D581EE0631B0067CC1D /* antimony.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = antimony.caf; sourceTree = "<group>"; };
