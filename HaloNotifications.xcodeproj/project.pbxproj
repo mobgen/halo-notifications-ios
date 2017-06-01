@@ -55,7 +55,7 @@
 		00E9BA4A1D5510650020D327 /* upsilon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA221D5510650020D327 /* upsilon.aiff */; };
 		00E9BA4B1D5510650020D327 /* voila.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA231D5510650020D327 /* voila.aiff */; };
 		2846F40C1E6D6811009DFA3D /* HaloNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846F40B1E6D6811009DFA3D /* HaloNotification.swift */; };
-		284FEEC71EDFFF680048E664 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284FEEC61EDFFF680048E664 /* NotificationService.swift */; };
+		284FEEF11EE026A90048E664 /* NotificationsAddon+ServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284FEEF01EE026A80048E664 /* NotificationsAddon+ServiceExtension.swift */; };
 		28C605221ED437EE001D310E /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C6051C1ED437EE001D310E /* FirebaseAnalytics.framework */; };
 		28C605231ED437EE001D310E /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C6051D1ED437EE001D310E /* FirebaseCore.framework */; };
 		28C605241ED437EE001D310E /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C6051E1ED437EE001D310E /* FirebaseCoreDiagnostics.framework */; };
@@ -128,8 +128,7 @@
 		00E9BA231D5510650020D327 /* voila.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = voila.aiff; sourceTree = "<group>"; };
 		2846F40B1E6D6811009DFA3D /* HaloNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloNotification.swift; sourceTree = "<group>"; };
 		284FEEC41EDFFF680048E664 /* HaloNotificationsServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HaloNotificationsServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		284FEEC61EDFFF680048E664 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
-		284FEEC81EDFFF680048E664 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		284FEEF01EE026A80048E664 /* NotificationsAddon+ServiceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NotificationsAddon+ServiceExtension.swift"; sourceTree = "<group>"; };
 		28C6051C1ED437EE001D310E /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
 		28C6051D1ED437EE001D310E /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = "<group>"; };
 		28C6051E1ED437EE001D310E /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
@@ -213,10 +212,10 @@
 		00A409751D11A019005D4FB0 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				284FEEC51EDFFF680048E664 /* NotificationsServiceExtension */,
-				00B89FF61D19231700E117A5 /* NotificationsAddon.swift */,
-				00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */,
 				2846F40B1E6D6811009DFA3D /* HaloNotification.swift */,
+				00B89FF61D19231700E117A5 /* NotificationsAddon.swift */,
+				284FEEF01EE026A80048E664 /* NotificationsAddon+ServiceExtension.swift */,
+				00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -296,16 +295,6 @@
 				00E9BA231D5510650020D327 /* voila.aiff */,
 			);
 			path = Sounds;
-			sourceTree = "<group>";
-		};
-		284FEEC51EDFFF680048E664 /* NotificationsServiceExtension */ = {
-			isa = PBXGroup;
-			children = (
-				284FEEC61EDFFF680048E664 /* NotificationService.swift */,
-				284FEEC81EDFFF680048E664 /* Info.plist */,
-			);
-			name = NotificationsServiceExtension;
-			path = ../HaloRichNotifications;
 			sourceTree = "<group>";
 		};
 		28C6051B1ED437EE001D310E /* Analytics */ = {
@@ -519,6 +508,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00B89FFB1D194FEC00E117A5 /* NotificationsProtocols.swift in Sources */,
+				284FEEF11EE026A90048E664 /* NotificationsAddon+ServiceExtension.swift in Sources */,
 				00B89FF71D19231700E117A5 /* NotificationsAddon.swift in Sources */,
 				2846F40C1E6D6811009DFA3D /* HaloNotification.swift in Sources */,
 			);
@@ -528,7 +518,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				284FEEC71EDFFF680048E664 /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
