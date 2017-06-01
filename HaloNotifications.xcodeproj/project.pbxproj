@@ -55,6 +55,7 @@
 		00E9BA4A1D5510650020D327 /* upsilon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA221D5510650020D327 /* upsilon.aiff */; };
 		00E9BA4B1D5510650020D327 /* voila.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 00E9BA231D5510650020D327 /* voila.aiff */; };
 		2846F40C1E6D6811009DFA3D /* HaloNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846F40B1E6D6811009DFA3D /* HaloNotification.swift */; };
+		284FEEC71EDFFF680048E664 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284FEEC61EDFFF680048E664 /* NotificationService.swift */; };
 		28C605221ED437EE001D310E /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C6051C1ED437EE001D310E /* FirebaseAnalytics.framework */; };
 		28C605231ED437EE001D310E /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C6051D1ED437EE001D310E /* FirebaseCore.framework */; };
 		28C605241ED437EE001D310E /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C6051E1ED437EE001D310E /* FirebaseCoreDiagnostics.framework */; };
@@ -126,6 +127,9 @@
 		00E9BA221D5510650020D327 /* upsilon.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = upsilon.aiff; sourceTree = "<group>"; };
 		00E9BA231D5510650020D327 /* voila.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = voila.aiff; sourceTree = "<group>"; };
 		2846F40B1E6D6811009DFA3D /* HaloNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloNotification.swift; sourceTree = "<group>"; };
+		284FEEC41EDFFF680048E664 /* HaloNotificationsServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = HaloNotificationsServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		284FEEC61EDFFF680048E664 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		284FEEC81EDFFF680048E664 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28C6051C1ED437EE001D310E /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseAnalytics.framework; sourceTree = "<group>"; };
 		28C6051D1ED437EE001D310E /* FirebaseCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCore.framework; sourceTree = "<group>"; };
 		28C6051E1ED437EE001D310E /* FirebaseCoreDiagnostics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FirebaseCoreDiagnostics.framework; sourceTree = "<group>"; };
@@ -166,6 +170,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		284FEEC11EDFFF680048E664 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -181,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				006EDC841E12841900F583BC /* Tests */,
+				284FEEC51EDFFF680048E664 /* HaloNotificationsServiceExtension */,
 				00A4097A1D11A0F8005D4FB0 /* Frameworks */,
 				00A409651D119BAF005D4FB0 /* Products */,
 				00E9B9FB1D5510650020D327 /* Sounds */,
@@ -194,6 +206,7 @@
 			children = (
 				00A409641D119BAF005D4FB0 /* HaloNotifications.framework */,
 				006EDC831E12841900F583BC /* HaloNotificationsTests.xctest */,
+				284FEEC41EDFFF680048E664 /* HaloNotificationsServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -285,6 +298,16 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
+		284FEEC51EDFFF680048E664 /* HaloNotificationsServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				284FEEC61EDFFF680048E664 /* NotificationService.swift */,
+				284FEEC81EDFFF680048E664 /* Info.plist */,
+			);
+			name = HaloNotificationsServiceExtension;
+			path = HaloRichNotifications;
+			sourceTree = "<group>";
+		};
 		28C6051B1ED437EE001D310E /* Analytics */ = {
 			isa = PBXGroup;
 			children = (
@@ -357,13 +380,30 @@
 			productReference = 00A409641D119BAF005D4FB0 /* HaloNotifications.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		284FEEC31EDFFF680048E664 /* HaloNotificationsServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 284FEECB1EDFFF680048E664 /* Build configuration list for PBXNativeTarget "HaloNotificationsServiceExtension" */;
+			buildPhases = (
+				284FEEC01EDFFF680048E664 /* Sources */,
+				284FEEC11EDFFF680048E664 /* Frameworks */,
+				284FEEC21EDFFF680048E664 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HaloNotificationsServiceExtension;
+			productName = HaloRichNotifications;
+			productReference = 284FEEC41EDFFF680048E664 /* HaloNotificationsServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		00A4095B1D119BAF005D4FB0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0820;
+				LastSwiftUpdateCheck = 0830;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Mobgen Technology";
 				TargetAttributes = {
@@ -375,6 +415,11 @@
 					00A409631D119BAF005D4FB0 = {
 						CreatedOnToolsVersion = 7.3.1;
 						LastSwiftMigration = 0800;
+					};
+					284FEEC31EDFFF680048E664 = {
+						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = 4DWNK4MCTP;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -392,6 +437,7 @@
 			targets = (
 				00A409631D119BAF005D4FB0 /* HaloNotifications */,
 				006EDC821E12841900F583BC /* HaloNotificationsTests */,
+				284FEEC31EDFFF680048E664 /* HaloNotificationsServiceExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -451,6 +497,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		284FEEC21EDFFF680048E664 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -468,6 +521,14 @@
 				00B89FFB1D194FEC00E117A5 /* NotificationsProtocols.swift in Sources */,
 				00B89FF71D19231700E117A5 /* NotificationsAddon.swift in Sources */,
 				2846F40C1E6D6811009DFA3D /* HaloNotification.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		284FEEC01EDFFF680048E664 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				284FEEC71EDFFF680048E664 /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -682,6 +743,39 @@
 			};
 			name = Release;
 		};
+		284FEEC91EDFFF680048E664 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = 4DWNK4MCTP;
+				INFOPLIST_FILE = HaloRichNotifications/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloNotifications;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		284FEECA1EDFFF680048E664 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = 4DWNK4MCTP;
+				INFOPLIST_FILE = HaloRichNotifications/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloNotifications;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -708,6 +802,15 @@
 			buildConfigurations = (
 				00A4096D1D119BAF005D4FB0 /* Debug */,
 				00A4096E1D119BAF005D4FB0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		284FEECB1EDFFF680048E664 /* Build configuration list for PBXNativeTarget "HaloNotificationsServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				284FEEC91EDFFF680048E664 /* Debug */,
+				284FEECA1EDFFF680048E664 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
