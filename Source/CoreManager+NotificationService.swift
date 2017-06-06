@@ -26,6 +26,9 @@ extension CoreManager {
             }
             
             contentHandler(bestAttemptContent)
+        } else {
+            // Otherwise, return the original content
+            contentHandler(request.content)
         }
     }
 }
