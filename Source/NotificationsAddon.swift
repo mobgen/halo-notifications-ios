@@ -115,6 +115,14 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
         
     }
     
+    public func applicationWillChangeEnvironment(_ app: UIApplication, core: CoreManager) {
+        UIApplication.shared.unregisterForRemoteNotifications()
+    }
+    
+    public func applicationDidChangeEnvironment(_ app: UIApplication, core: CoreManager) {
+        
+    }
+    
     // MARK: Notifications
     
     open func application(_ app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: CoreManager) {
