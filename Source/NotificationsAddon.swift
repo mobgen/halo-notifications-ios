@@ -16,6 +16,7 @@ import FirebaseInstanceID
 @objc(HaloNotificationsAddon)
 open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAddon, UNUserNotificationCenterDelegate {
     
+    public var completionHandler: ((HaloAddon, Bool) -> Void)?
     public var addonName = "Notifications"
     public var delegate: NotificationsDelegate?
     public var twoFactorDelegate: TwoFactorAuthenticationDelegate?
@@ -45,7 +46,13 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
             FirebaseApp.configure()
         }
 
-        handler?(self, true)
+        self.completionHandler = handler
+        
+        if self.autoRegister {
+            registerApplicationForNotifications()
+        } else {
+            handler?(self, true)
+        }
     }
 
     public func willRegisterAddon(haloCore core: CoreManager) {
@@ -95,10 +102,6 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
             UNUserNotificationCenter.current().delegate = self
         }
         
-        if self.autoRegister {
-            registerApplicationForNotifications()
-        }
-
         return true
     }
     
@@ -120,7 +123,6 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
     }
     
     public func applicationDidChangeEnvironment(_ app: UIApplication, core: CoreManager) {
-        
     }
     
     // MARK: Notifications
@@ -131,16 +133,27 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
             let token = InstanceID.instanceID().token() {
             
             device.info = DeviceInfo(platform: "ios", token: token)
-            Halo.Manager.core.saveDevice { _ in
-                core.logMessage("Successfully registered for remote notifications with Firebase token: \(token)", level: .info)
+            Halo.Manager.core.saveDevice { _, result in
+                
+                switch result {
+                case .success(_, _):
+                    core.logMessage("Successfully registered for remote notifications with Firebase token: \(token)", level: .info)
+                    self.completionHandler?(self, true)
+                case .failure(let error):
+                    core.logMessage("Error saving device: \(error.localizedDescription)", level: .error)
+                    self.completionHandler?(self, false)
+                }
+                
             }
         } else {
             core.logMessage("Error registering for remote notifications. No Firebase token available", level: .error)
+            self.completionHandler?(self, false)
         }
     }
 
     open func application(_ app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: CoreManager) {
         core.logMessage("Error registering for remote notifications. \(error.localizedDescription)", level: .error)
+        self.completionHandler?(self, false)
     }
     
     open func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
