@@ -11,11 +11,11 @@ import UserNotifications
 import Halo
 import UIKit
 import Firebase
-import FirebaseInstanceID
 
 @objc(HaloNotificationsAddon)
-open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAddon, UNUserNotificationCenterDelegate {
+open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAddon, UNUserNotificationCenterDelegate, MessagingDelegate {
     
+    public var completionHandler: ((HaloAddon, Bool) -> Void)?
     public var addonName = "Notifications"
     public var delegate: NotificationsDelegate?
     public var twoFactorDelegate: TwoFactorAuthenticationDelegate?
@@ -34,18 +34,22 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
     // MARK: Addon lifecycle
 
     open func setup(haloCore core: CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)? = nil) {
-        // Add observer to listen for the token refresh notification.
-        NotificationCenter.default.addObserver(self, selector: #selector(NotificationsAddon.onTokenRefresh), name: NSNotification.Name.InstanceIDTokenRefresh, object: nil)
         handler?(self, true)
     }
 
-    open func startup(haloCore core: CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)? = nil) {
+    open func startup(app: UIApplication, haloCore core: CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)? = nil) {
         
         if FirebaseApp.app() == nil {
             FirebaseApp.configure()
         }
 
-        handler?(self, true)
+        self.completionHandler = handler
+        
+        if self.autoRegister {
+            registerApplicationForNotifications(app)
+        } else {
+            handler?(self, true)
+        }
     }
 
     public func willRegisterAddon(haloCore core: CoreManager) {
@@ -56,17 +60,17 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
         
     }
     
-    public func registerApplicationForNotifications() {
+    public func registerApplicationForNotifications(_ app: UIApplication) {
         if #available(iOS 10.0, *) {
-            registerApplicationForNotificationsWithAuthOptions()
+            registerApplicationForNotificationsWithAuthOptions(app)
         } else {
-            registerApplicationForNotificationsWithSettings()
+            registerApplicationForNotificationsWithSettings(app)
         }
     }
     
     @available(iOS 10.0, *)
     public func registerApplicationForNotificationsWithAuthOptions(
-        _ app: UIApplication = UIApplication.shared,
+        _ app: UIApplication,
         authOptions options: UNAuthorizationOptions = [.alert, .badge, .sound]) -> Void {
         
         UNUserNotificationCenter.current().requestAuthorization(
@@ -77,7 +81,7 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
     }
     
     public func registerApplicationForNotificationsWithSettings(
-        _ app: UIApplication = UIApplication.shared,
+        _ app: UIApplication,
         notificationSettings settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)) -> Void {
         
         app.registerUserNotificationSettings(settings)
@@ -95,10 +99,6 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
             UNUserNotificationCenter.current().delegate = self
         }
         
-        if self.autoRegister {
-            registerApplicationForNotifications()
-        }
-
         return true
     }
     
@@ -115,24 +115,42 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
         
     }
     
+    public func applicationWillChangeEnvironment(_ app: UIApplication, core: CoreManager) {
+        app.unregisterForRemoteNotifications()
+    }
+    
+    public func applicationDidChangeEnvironment(_ app: UIApplication, core: CoreManager) {
+    }
+    
     // MARK: Notifications
     
     open func application(_ app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: CoreManager) {
 
         if let device = Halo.Manager.core.device,
-            let token = InstanceID.instanceID().token() {
+            let token = Messaging.messaging().fcmToken {
             
             device.info = DeviceInfo(platform: "ios", token: token)
-            Halo.Manager.core.saveDevice { _ in
-                core.logMessage("Successfully registered for remote notifications with Firebase token: \(token)", level: .info)
+            Halo.Manager.core.saveDevice { _, result in
+                
+                switch result {
+                case .success(_, _):
+                    core.logMessage("Successfully registered for remote notifications with Firebase token: \(token)", level: .info)
+                    self.completionHandler?(self, true)
+                case .failure(let error):
+                    core.logMessage("Error saving device: \(error.localizedDescription)", level: .error)
+                    self.completionHandler?(self, false)
+                }
+                
             }
         } else {
             core.logMessage("Error registering for remote notifications. No Firebase token available", level: .error)
+            self.completionHandler?(self, false)
         }
     }
 
     open func application(_ app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: CoreManager) {
         core.logMessage("Error registering for remote notifications. \(error.localizedDescription)", level: .error)
+        self.completionHandler?(self, false)
     }
     
     open func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
@@ -151,12 +169,10 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
     }
 
     @objc
-    fileprivate func onTokenRefresh() -> Void {
-
-        if let device = Halo.Manager.core.device, let token = InstanceID.instanceID().token() {
-            device.info = DeviceInfo(platform: "ios", token: token)
+    public func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        if let device = Halo.Manager.core.device {
+            device.info = DeviceInfo(platform: "ios", token: fcmToken)
             Halo.Manager.core.saveDevice()
         }
-
     }
 }
