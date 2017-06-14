@@ -11,10 +11,9 @@ import UserNotifications
 import Halo
 import UIKit
 import Firebase
-import FirebaseInstanceID
 
 @objc(HaloNotificationsAddon)
-open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAddon, UNUserNotificationCenterDelegate {
+open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAddon, UNUserNotificationCenterDelegate, MessagingDelegate {
     
     public var completionHandler: ((HaloAddon, Bool) -> Void)?
     public var addonName = "Notifications"
@@ -35,8 +34,6 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
     // MARK: Addon lifecycle
 
     open func setup(haloCore core: CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)? = nil) {
-        // Add observer to listen for the token refresh notification.
-        NotificationCenter.default.addObserver(self, selector: #selector(NotificationsAddon.onTokenRefresh), name: NSNotification.Name.InstanceIDTokenRefresh, object: nil)
         handler?(self, true)
     }
 
@@ -130,7 +127,7 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
     open func application(_ app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: CoreManager) {
 
         if let device = Halo.Manager.core.device,
-            let token = InstanceID.instanceID().token() {
+            let token = Messaging.messaging().fcmToken {
             
             device.info = DeviceInfo(platform: "ios", token: token)
             Halo.Manager.core.saveDevice { _, result in
@@ -172,12 +169,10 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
     }
 
     @objc
-    fileprivate func onTokenRefresh() -> Void {
-
-        if let device = Halo.Manager.core.device, let token = InstanceID.instanceID().token() {
-            device.info = DeviceInfo(platform: "ios", token: token)
+    public func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        if let device = Halo.Manager.core.device {
+            device.info = DeviceInfo(platform: "ios", token: fcmToken)
             Halo.Manager.core.saveDevice()
         }
-
     }
 }
