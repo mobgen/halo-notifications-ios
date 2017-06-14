@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Halo
 import UserNotifications
 
 @available(iOS 10.0, *)
@@ -18,6 +19,8 @@ open class HaloNotificationService: UNNotificationServiceExtension {
     override open func didReceive(_ request: UNNotificationRequest, withContentHandler contentHandler: @escaping (UNNotificationContent) -> Void) {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
+        
+        Manager.core.logMessage("Received mutable notification: \(request.content.body)", level: .info)
         
         if let bestAttemptContent = bestAttemptContent,
             let image = request.content.userInfo["image"] as? [String: String],

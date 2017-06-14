@@ -40,7 +40,7 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
         handler?(self, true)
     }
 
-    open func startup(haloCore core: CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)? = nil) {
+    open func startup(app: UIApplication, haloCore core: CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)? = nil) {
         
         if FirebaseApp.app() == nil {
             FirebaseApp.configure()
@@ -49,7 +49,7 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
         self.completionHandler = handler
         
         if self.autoRegister {
-            registerApplicationForNotifications()
+            registerApplicationForNotifications(app)
         } else {
             handler?(self, true)
         }
@@ -63,17 +63,17 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
         
     }
     
-    public func registerApplicationForNotifications() {
+    public func registerApplicationForNotifications(_ app: UIApplication) {
         if #available(iOS 10.0, *) {
-            registerApplicationForNotificationsWithAuthOptions()
+            registerApplicationForNotificationsWithAuthOptions(app)
         } else {
-            registerApplicationForNotificationsWithSettings()
+            registerApplicationForNotificationsWithSettings(app)
         }
     }
     
     @available(iOS 10.0, *)
     public func registerApplicationForNotificationsWithAuthOptions(
-        _ app: UIApplication = UIApplication.shared,
+        _ app: UIApplication,
         authOptions options: UNAuthorizationOptions = [.alert, .badge, .sound]) -> Void {
         
         UNUserNotificationCenter.current().requestAuthorization(
@@ -84,7 +84,7 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
     }
     
     public func registerApplicationForNotificationsWithSettings(
-        _ app: UIApplication = UIApplication.shared,
+        _ app: UIApplication,
         notificationSettings settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)) -> Void {
         
         app.registerUserNotificationSettings(settings)
@@ -119,7 +119,7 @@ open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAd
     }
     
     public func applicationWillChangeEnvironment(_ app: UIApplication, core: CoreManager) {
-        UIApplication.shared.unregisterForRemoteNotifications()
+        app.unregisterForRemoteNotifications()
     }
     
     public func applicationDidChangeEnvironment(_ app: UIApplication, core: CoreManager) {
