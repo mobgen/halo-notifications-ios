@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		005271191DEF3F07005826B7 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005271181DEF3F07005826B7 /* UserNotifications.framework */; };
 		006EDC901E128CB500F583BC /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006EDC8F1E128CB500F583BC /* Halo.framework */; };
 		006EDC9A1E1297F800F583BC /* HaloNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00A409641D119BAF005D4FB0 /* HaloNotifications.framework */; };
 		006EDC9B1E1297FB00F583BC /* Halo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 006EDC8F1E128CB500F583BC /* Halo.framework */; };
@@ -56,6 +55,7 @@
 		28B86E1B1EE14C060067CC1D /* tethys.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 28B86DF31EE14C060067CC1D /* tethys.aiff */; };
 		28B86E1C1EE14C060067CC1D /* upsilon.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 28B86DF41EE14C060067CC1D /* upsilon.aiff */; };
 		28B86E1D1EE14C060067CC1D /* voila.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 28B86DF51EE14C060067CC1D /* voila.aiff */; };
+		28C24C181EF2B28A006880DF /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005271181DEF3F07005826B7 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		28C605221ED437EE001D310E /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C6051C1ED437EE001D310E /* FirebaseAnalytics.framework */; };
 		28C605231ED437EE001D310E /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C6051D1ED437EE001D310E /* FirebaseCore.framework */; };
 		28C605241ED437EE001D310E /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C6051E1ED437EE001D310E /* FirebaseCoreDiagnostics.framework */; };
@@ -155,9 +155,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				28C24C181EF2B28A006880DF /* UserNotifications.framework in Frameworks */,
 				28C605231ED437EE001D310E /* FirebaseCore.framework in Frameworks */,
 				28C605251ED437EE001D310E /* FirebaseInstanceID.framework in Frameworks */,
-				005271191DEF3F07005826B7 /* UserNotifications.framework in Frameworks */,
 				28C605241ED437EE001D310E /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				006EDC901E128CB500F583BC /* Halo.framework in Frameworks */,
 				28C605271ED437EE001D310E /* GoogleToolboxForMac.framework in Frameworks */,
