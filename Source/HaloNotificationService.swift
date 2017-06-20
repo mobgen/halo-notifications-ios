@@ -20,17 +20,20 @@ open class HaloNotificationService: UNNotificationServiceExtension {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
-        Manager.core.logMessage("Received mutable notification: \(request.content.body)", level: .info)
-        
         if let bestAttemptContent = bestAttemptContent,
-            let image = request.content.userInfo["image"] as? [String: String],
-            let imageUrl = image["url"],
-            let url = URL(string: imageUrl)
+            let imageString = bestAttemptContent.userInfo["image"] as? String,
+            let imageData = imageString.data(using: .utf8),
+            let imageDict = try? JSONSerialization.jsonObject(with: imageData, options: .mutableContainers)
         {
-            // Modify the notification content here...
-            if let attachment = try? UNNotificationAttachment(identifier: "image", url: url) {
+            if let imageDict = imageDict as? [String: Any?],
+                let imageUrlString = imageDict["url"] as? String,
+                let imageUrl = URL(string: imageUrlString),
+                let imageData = try? Data(contentsOf: imageUrl),
+                let attachment = UNNotificationAttachment.create(imageFileIdentifier: "image.jpg", data: imageData) {
+                
                 bestAttemptContent.attachments = [attachment]
             }
+            
             
             contentHandler(bestAttemptContent)
         } else {
@@ -47,4 +50,27 @@ open class HaloNotificationService: UNNotificationServiceExtension {
         }
     }
     
+}
+
+@available(iOSApplicationExtension 10.0, *)
+extension UNNotificationAttachment {
+    
+    /// Save the image to disk
+    static func create(imageFileIdentifier: String, data: Data, options: [NSObject : AnyObject]? = nil) -> UNNotificationAttachment? {
+        let fileManager = FileManager.default
+        let tmpSubFolderName = ProcessInfo.processInfo.globallyUniqueString
+        let tmpSubFolderURL = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(tmpSubFolderName, isDirectory: true)
+        
+        do {
+            try fileManager.createDirectory(at: tmpSubFolderURL!, withIntermediateDirectories: true, attributes: nil)
+            let fileURL = tmpSubFolderURL?.appendingPathComponent(imageFileIdentifier)
+            try data.write(to: fileURL!, options: [])
+            let imageAttachment = try UNNotificationAttachment(identifier: imageFileIdentifier, url: fileURL!, options: options)
+            return imageAttachment
+        } catch let error {
+            print("error \(error)")
+        }
+        
+        return nil
+    }
 }
