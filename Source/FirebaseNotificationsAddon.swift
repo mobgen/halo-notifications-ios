@@ -12,8 +12,8 @@ import Halo
 import UIKit
 import Firebase
 
-@objc(HaloNotificationsAddon)
-open class NotificationsAddon: NSObject, Halo.HaloNotificationsAddon, HaloLifecycleAddon, UNUserNotificationCenterDelegate, MessagingDelegate {
+@objc(HaloFirebaseNotificationsAddon)
+open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAddon, UNUserNotificationCenterDelegate, MessagingDelegate {
     
     public var completionHandler: ((HaloAddon, Bool) -> Void)?
     public var addonName = "Notifications"
