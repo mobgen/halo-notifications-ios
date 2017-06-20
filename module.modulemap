@@ -1,0 +1,8 @@
+framework module HaloNotifications {
+    header "HaloNotifications-Swift.h"
+}
+
+framework module Firebase {
+    header "Firebase.h"
+    export *
+}

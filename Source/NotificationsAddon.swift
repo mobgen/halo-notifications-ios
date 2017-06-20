@@ -13,7 +13,7 @@ import UIKit
 import Firebase
 
 @objc(HaloNotificationsAddon)
-open class NotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAddon, UNUserNotificationCenterDelegate, MessagingDelegate {
+open class NotificationsAddon: NSObject, Halo.HaloNotificationsAddon, HaloLifecycleAddon, UNUserNotificationCenterDelegate, MessagingDelegate {
     
     public var completionHandler: ((HaloAddon, Bool) -> Void)?
     public var addonName = "Notifications"
