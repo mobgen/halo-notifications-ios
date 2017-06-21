@@ -80,6 +80,7 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
         app.registerForRemoteNotifications()
     }
     
+    @available(iOS, obsoleted: 10.0)
     public func registerApplicationForNotificationsWithSettings(
         _ app: UIApplication,
         notificationSettings settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)) -> Void {
