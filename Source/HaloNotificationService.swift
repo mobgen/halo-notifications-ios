@@ -8,19 +8,21 @@
 
 import UserNotifications
 
+import UserNotifications
+
 @available(iOSApplicationExtension 10.0, *)
 fileprivate extension UNNotificationAttachment {
-    static func create(fromMedia media: String, withData data: Data) -> UNNotificationAttachment? {
+    static func create(fromTemporaryFile fileURL: URL, withFilename filename: String) -> UNNotificationAttachment? {
         let fileManager = FileManager.default
         let tmpSubFolderName = ProcessInfo.processInfo.globallyUniqueString
         let tmpSubFolderURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(tmpSubFolderName, isDirectory: true)
         do {
             try fileManager.createDirectory(at: tmpSubFolderURL, withIntermediateDirectories: true, attributes: nil)
-            let fileIdentifier = media.components(separatedBy: "/").last!
-            let fileURL = tmpSubFolderURL.appendingPathComponent(fileIdentifier)
+            let newFileURL = tmpSubFolderURL.appendingPathComponent(filename)
             
-            try data.write(to: fileURL)
-            return self.create(fileIdentifier: fileIdentifier, fileUrl: fileURL)
+            try fileManager.copyItem(atPath: fileURL.relativePath, toPath: newFileURL.relativePath)
+            
+            return self.create(fileIdentifier: filename, fileUrl: newFileURL)
         } catch {
             print("error " + error.localizedDescription)
         }
@@ -43,23 +45,30 @@ private func resourceURL(forUrlString urlString: String) -> URL? {
 }
 
 @available(iOSApplicationExtension 10.0, *)
-fileprivate func loadAttachment(forMedia media: String, completionHandler: ((UNNotificationAttachment?) -> Void)) {
+fileprivate func loadAttachment(forMedia media: String, completionHandler: @escaping ((UNNotificationAttachment?) -> Void)) {
     guard let url = resourceURL(forUrlString: media) else {
         completionHandler(nil)
         return
     }
     
-    do {
-        let data = try Data(contentsOf: url)
-        if let attachment = UNNotificationAttachment.create(fromMedia: media, withData: data) {
-            completionHandler(attachment)
-            return
+    //let data = try Data(contentsOf: url)
+    
+    let session = URLSession(configuration: URLSessionConfiguration.default)
+    let task = session.downloadTask(with: url) { (location, response, error) in
+        
+        guard let location = location,
+            let response = response else {
+                completionHandler(nil)
+                return
         }
-        completionHandler(nil)
-    } catch {
-        print("error " + error.localizedDescription)
-        completionHandler(nil)
+        
+        if let attachment = UNNotificationAttachment.create(fromTemporaryFile: location, withFilename: response.suggestedFilename ?? "image.jpg") {
+            completionHandler(attachment)
+        }
+        
     }
+    
+    task.resume()
 }
 
 @available(iOS 10.0, *)
@@ -78,9 +87,9 @@ open class HaloNotificationService: UNNotificationServiceExtension {
             let imageObject = try? JSONSerialization.jsonObject(with: imageData, options: .mutableContainers),
             let imageDict = imageObject as? [String: Any?],
             let imageUrlString = imageDict["url"] as? String
-        else {
-            contentHandler(request.content)
-            return
+            else {
+                contentHandler(request.content)
+                return
         }
         
         loadAttachment(forMedia: imageUrlString) { attachment in
