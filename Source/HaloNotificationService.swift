@@ -6,9 +6,60 @@
 //  Copyright © 2017 Mobgen Technology. All rights reserved.
 //
 
-import Foundation
-import Halo
 import UserNotifications
+
+@available(iOSApplicationExtension 10.0, *)
+fileprivate extension UNNotificationAttachment {
+    static func create(fromMedia media: String, withData data: Data) -> UNNotificationAttachment? {
+        let fileManager = FileManager.default
+        let tmpSubFolderName = ProcessInfo.processInfo.globallyUniqueString
+        let tmpSubFolderURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(tmpSubFolderName, isDirectory: true)
+        do {
+            try fileManager.createDirectory(at: tmpSubFolderURL, withIntermediateDirectories: true, attributes: nil)
+            let fileURL = tmpSubFolderURL.appendingPathComponent(media)
+            
+            try data.write(to: fileURL)
+            return self.create(fileIdentifier: "image", fileUrl: fileURL)
+        } catch {
+            print("error " + error.localizedDescription)
+        }
+        return nil
+    }
+    
+    static func create(fileIdentifier: String, fileUrl: URL, options: [String : Any]? = nil) -> UNNotificationAttachment? {
+        var n: UNNotificationAttachment?
+        do {
+            n = try UNNotificationAttachment(identifier: fileIdentifier, url: fileUrl, options: options)
+        } catch {
+            print("error " + error.localizedDescription)
+        }
+        return n
+    }
+}
+
+private func resourceURL(forUrlString urlString: String) -> URL? {
+    return URL(string: urlString)
+}
+
+@available(iOSApplicationExtension 10.0, *)
+fileprivate func loadAttachment(forMedia media: String, completionHandler: ((UNNotificationAttachment?) -> Void)) {
+    guard let url = resourceURL(forUrlString: media) else {
+        completionHandler(nil)
+        return
+    }
+    
+    do {
+        let data = try Data(contentsOf: url)
+        if let attachment = UNNotificationAttachment.create(fromMedia: media, withData: data) {
+            completionHandler(attachment)
+            return
+        }
+        completionHandler(nil)
+    } catch {
+        print("error " + error.localizedDescription)
+        completionHandler(nil)
+    }
+}
 
 @available(iOS 10.0, *)
 open class HaloNotificationService: UNNotificationServiceExtension {
@@ -20,26 +71,25 @@ open class HaloNotificationService: UNNotificationServiceExtension {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
-        if let bestAttemptContent = bestAttemptContent,
-            let imageString = bestAttemptContent.userInfo["image"] as? String,
+        guard let content = bestAttemptContent,
+            let imageString = content.userInfo["image"] as? String,
             let imageData = imageString.data(using: .utf8),
-            let imageDict = try? JSONSerialization.jsonObject(with: imageData, options: .mutableContainers)
-        {
-            if let imageDict = imageDict as? [String: Any?],
-                let imageUrlString = imageDict["url"] as? String,
-                let imageUrl = URL(string: imageUrlString),
-                let imageData = try? Data(contentsOf: imageUrl),
-                let attachment = UNNotificationAttachment.create(imageFileIdentifier: "image.jpg", data: imageData) {
-                
-                bestAttemptContent.attachments = [attachment]
-            }
-            
-            
-            contentHandler(bestAttemptContent)
-        } else {
-            // Otherwise, return the original content
+            let imageObject = try? JSONSerialization.jsonObject(with: imageData, options: .mutableContainers),
+            let imageDict = imageObject as? [String: Any?],
+            let imageUrlString = imageDict["url"] as? String
+        else {
             contentHandler(request.content)
+            return
         }
+        
+        loadAttachment(forMedia: imageUrlString) { attachment in
+            
+            if let attachment = attachment {
+                content.attachments = [attachment]
+            }
+            contentHandler(content)
+        }
+        
     }
     
     override open func serviceExtensionTimeWillExpire() {
@@ -50,27 +100,4 @@ open class HaloNotificationService: UNNotificationServiceExtension {
         }
     }
     
-}
-
-@available(iOSApplicationExtension 10.0, *)
-extension UNNotificationAttachment {
-    
-    /// Save the image to disk
-    static func create(imageFileIdentifier: String, data: Data, options: [NSObject : AnyObject]? = nil) -> UNNotificationAttachment? {
-        let fileManager = FileManager.default
-        let tmpSubFolderName = ProcessInfo.processInfo.globallyUniqueString
-        let tmpSubFolderURL = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(tmpSubFolderName, isDirectory: true)
-        
-        do {
-            try fileManager.createDirectory(at: tmpSubFolderURL!, withIntermediateDirectories: true, attributes: nil)
-            let fileURL = tmpSubFolderURL?.appendingPathComponent(imageFileIdentifier)
-            try data.write(to: fileURL!, options: [])
-            let imageAttachment = try UNNotificationAttachment(identifier: imageFileIdentifier, url: fileURL!, options: options)
-            return imageAttachment
-        } catch let error {
-            print("error \(error)")
-        }
-        
-        return nil
-    }
 }
