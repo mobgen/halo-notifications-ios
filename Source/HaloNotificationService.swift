@@ -46,12 +46,11 @@ private func resourceURL(forUrlString urlString: String) -> URL? {
 
 @available(iOSApplicationExtension 10.0, *)
 fileprivate func loadAttachment(forMedia media: String, completionHandler: @escaping ((UNNotificationAttachment?) -> Void)) {
+    
     guard let url = resourceURL(forUrlString: media) else {
         completionHandler(nil)
         return
     }
-    
-    //let data = try Data(contentsOf: url)
     
     let session = URLSession(configuration: URLSessionConfiguration.default)
     let task = session.downloadTask(with: url) { (location, response, error) in
