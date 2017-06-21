@@ -619,7 +619,7 @@
 				MODULEMAP_FILE = module.modulemap;
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"$(OTHER_LD_FLAGS)",
+					"$(OTHER_LDFLAGS)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloNotifications;
 				PRODUCT_NAME = HaloNotifications;
@@ -650,7 +650,7 @@
 				MODULEMAP_FILE = module.modulemap;
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"$(OTHER_LD_FLAGS)",
+					"$(OTHER_LDFLAGS)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloNotifications;
 				PRODUCT_NAME = HaloNotifications;
