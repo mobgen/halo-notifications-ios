@@ -1,8 +1,9 @@
-module HaloNotifications {
-    
+framework module HaloNotifications {
+
+    module Firebase {
+        header "Firebase.h"
+        export *
+    }
+
 }
 
-framework module Firebase {
-    header "Firebase.h"
-    export *
-}
