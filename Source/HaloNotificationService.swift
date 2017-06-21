@@ -16,10 +16,11 @@ fileprivate extension UNNotificationAttachment {
         let tmpSubFolderURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(tmpSubFolderName, isDirectory: true)
         do {
             try fileManager.createDirectory(at: tmpSubFolderURL, withIntermediateDirectories: true, attributes: nil)
-            let fileURL = tmpSubFolderURL.appendingPathComponent(media)
+            let fileIdentifier = media.components(separatedBy: "/").last!
+            let fileURL = tmpSubFolderURL.appendingPathComponent(fileIdentifier)
             
             try data.write(to: fileURL)
-            return self.create(fileIdentifier: "image", fileUrl: fileURL)
+            return self.create(fileIdentifier: fileIdentifier, fileUrl: fileURL)
         } catch {
             print("error " + error.localizedDescription)
         }
