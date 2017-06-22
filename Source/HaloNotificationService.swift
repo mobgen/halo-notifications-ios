@@ -77,7 +77,7 @@ open class HaloNotificationService: UNNotificationServiceExtension {
             return
         }
         
-        let session = URLSession(configuration: URLSessionConfiguration.default)
+        let session = URLSession(configuration: URLSessionConfiguration.background(withIdentifier: "imageDownload"))
         
         // Create the task to download the file
         let task = session.downloadTask(with: url) { (location, response, error) in
