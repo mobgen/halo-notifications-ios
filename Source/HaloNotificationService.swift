@@ -6,12 +6,10 @@
 //  Copyright © 2017 Mobgen Technology. All rights reserved.
 //
 
-import Foundation
-import Halo
 import UserNotifications
 
 @available(iOS 10.0, *)
-open class HaloNotificationService: UNNotificationServiceExtension {
+open class HaloNotificationService: UNNotificationServiceExtension, URLSessionDownloadDelegate {
     
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
@@ -20,57 +18,97 @@ open class HaloNotificationService: UNNotificationServiceExtension {
         self.contentHandler = contentHandler
         bestAttemptContent = (request.content.mutableCopy() as? UNMutableNotificationContent)
         
-        if let bestAttemptContent = bestAttemptContent,
-            let imageString = bestAttemptContent.userInfo["image"] as? String,
+        guard let content = bestAttemptContent,
+            let imageString = content.userInfo["image"] as? String,
             let imageData = imageString.data(using: .utf8),
-            let imageDict = try? JSONSerialization.jsonObject(with: imageData, options: .mutableContainers)
-        {
-            if let imageDict = imageDict as? [String: Any?],
-                let imageUrlString = imageDict["url"] as? String,
-                let imageUrl = URL(string: imageUrlString),
-                let imageData = try? Data(contentsOf: imageUrl),
-                let attachment = UNNotificationAttachment.create(imageFileIdentifier: "image.jpg", data: imageData) {
-                
-                bestAttemptContent.attachments = [attachment]
-            }
-            
-            
-            contentHandler(bestAttemptContent)
-        } else {
-            // Otherwise, return the original content
-            contentHandler(request.content)
+            let imageObject = try? JSONSerialization.jsonObject(with: imageData, options: .mutableContainers),
+            let imageDict = imageObject as? [String: Any?],
+            let imageUrlString = imageDict["url"] as? String
+            else {
+                contentHandler(request.content)
+                return
         }
+        
+        loadAttachment(forMedia: imageUrlString)
+        
     }
     
     override open func serviceExtensionTimeWillExpire() {
         // Called just before the extension will be terminated by the system.
         // Use this as an opportunity to deliver your "best attempt" at modified content, otherwise the original push payload will be used.
-        if let contentHandler = contentHandler, let bestAttemptContent =  bestAttemptContent {
+        if let contentHandler = contentHandler,
+            let bestAttemptContent =  bestAttemptContent {
             contentHandler(bestAttemptContent)
         }
     }
     
-}
-
-@available(iOSApplicationExtension 10.0, *)
-extension UNNotificationAttachment {
+    // MARK: Private utility functions
     
-    /// Save the image to disk
-    static func create(imageFileIdentifier: String, data: Data, options: [NSObject : AnyObject]? = nil) -> UNNotificationAttachment? {
+    fileprivate func storeFile(temporaryLocation location: URL, withFilename filename: String) -> URL? {
+        
         let fileManager = FileManager.default
         let tmpSubFolderName = ProcessInfo.processInfo.globallyUniqueString
-        let tmpSubFolderURL = NSURL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(tmpSubFolderName, isDirectory: true)
+        let tmpSubFolderURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(tmpSubFolderName, isDirectory: true)
         
         do {
-            try fileManager.createDirectory(at: tmpSubFolderURL!, withIntermediateDirectories: true, attributes: nil)
-            let fileURL = tmpSubFolderURL?.appendingPathComponent(imageFileIdentifier)
-            try data.write(to: fileURL!, options: [])
-            let imageAttachment = try UNNotificationAttachment(identifier: imageFileIdentifier, url: fileURL!, options: options)
-            return imageAttachment
-        } catch let error {
-            print("error \(error)")
+            try fileManager.createDirectory(at: tmpSubFolderURL, withIntermediateDirectories: true, attributes: nil)
+            let newFileURL = tmpSubFolderURL.appendingPathComponent(filename)
+            
+            try fileManager.copyItem(atPath: location.relativePath, toPath: newFileURL.relativePath)
+            
+            return newFileURL
+        } catch {
+            print("error " + error.localizedDescription)
         }
         
         return nil
     }
+    
+    fileprivate func loadAttachment(forMedia media: String) {
+        
+        guard let url = URL(string: media) else {
+            print("Error generating download URL")
+            return
+        }
+        
+        let config = URLSessionConfiguration.background(withIdentifier: ProcessInfo.processInfo.globallyUniqueString)
+        config.sharedContainerIdentifier = "group.com.mobgen.halo"
+        
+        let session = URLSession(configuration: config, delegate: self, delegateQueue: nil)
+        
+        // Create the task to download the file
+        let task = session.downloadTask(with: url)
+        task.resume()
+    }
+
+    // MARK: URLSessionDownloadDelegate methods
+    
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        
+        guard let contentHandler = contentHandler,
+            let content = bestAttemptContent else {
+                print("No content or content handler available")
+                return
+        }
+        
+        guard let response = downloadTask.response else {
+            print("No response from the download task")
+            contentHandler(content)
+            return
+        }
+        
+        let filename = response.suggestedFilename ?? "image.jpg"
+        
+        // Copy the temporary file to a disk location and create the UNNotificationAttachment from it
+        if let fileURL = self.storeFile(temporaryLocation: location, withFilename: filename),
+            let attachment = try? UNNotificationAttachment(identifier: filename, url: fileURL) {
+            
+            content.attachments = [attachment]
+            contentHandler(content)
+            return
+        }
+        
+    }
+    
+    
 }
