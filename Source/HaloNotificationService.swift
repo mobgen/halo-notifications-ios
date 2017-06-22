@@ -71,7 +71,10 @@ open class HaloNotificationService: UNNotificationServiceExtension, URLSessionDo
             return
         }
         
-        let session = URLSession(configuration: URLSessionConfiguration.background(withIdentifier: "imageDownload"), delegate: self, delegateQueue: nil)
+        let config = URLSessionConfiguration.background(withIdentifier: ProcessInfo.processInfo.globallyUniqueString)
+        config.sharedContainerIdentifier = "group.com.mobgen.halo"
+        
+        let session = URLSession(configuration: config, delegate: self, delegateQueue: nil)
         
         // Create the task to download the file
         let task = session.downloadTask(with: url)
@@ -79,7 +82,7 @@ open class HaloNotificationService: UNNotificationServiceExtension, URLSessionDo
     }
 
     // MARK: URLSessionDownloadDelegate methods
-
+    
     public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         
         guard let contentHandler = contentHandler,
