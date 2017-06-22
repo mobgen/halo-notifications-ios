@@ -9,7 +9,7 @@
 import UserNotifications
 
 @available(iOS 10.0, *)
-open class HaloNotificationService: UNNotificationServiceExtension {
+open class HaloNotificationService: UNNotificationServiceExtension, URLSessionDownloadDelegate {
     
     var contentHandler: ((UNNotificationContent) -> Void)?
     var bestAttemptContent: UNMutableNotificationContent?
@@ -29,13 +29,7 @@ open class HaloNotificationService: UNNotificationServiceExtension {
                 return
         }
         
-        loadAttachment(forMedia: imageUrlString) { attachment in
-            
-            if let attachment = attachment {
-                content.attachments = [attachment]
-            }
-            contentHandler(content)
-        }
+        loadAttachment(forMedia: imageUrlString)
         
     }
     
@@ -70,39 +64,48 @@ open class HaloNotificationService: UNNotificationServiceExtension {
         return nil
     }
     
-    fileprivate func loadAttachment(forMedia media: String, completionHandler: @escaping ((UNNotificationAttachment?) -> Void)) {
+    fileprivate func loadAttachment(forMedia media: String) {
         
         guard let url = URL(string: media) else {
-            completionHandler(nil)
+            print("Error generating download URL")
             return
         }
         
-        let session = URLSession(configuration: URLSessionConfiguration.background(withIdentifier: "imageDownload"))
+        let session = URLSession(configuration: URLSessionConfiguration.background(withIdentifier: "imageDownload"), delegate: self, delegateQueue: nil)
         
         // Create the task to download the file
-        let task = session.downloadTask(with: url) { (location, response, error) in
-            
-            guard let location = location,
-                let response = response else {
-                    completionHandler(nil)
-                    return
-            }
-            
-            let filename = response.suggestedFilename ?? "image.jpg"
-            
-            // Copy the temporary file to a disk location and create the UNNotificationAttachment from it
-            if let fileURL = self.storeFile(temporaryLocation: location, withFilename: filename),
-                let attachment = try? UNNotificationAttachment(identifier: filename, url: fileURL) {
-                completionHandler(attachment)
-                return
-            }
-            
-            completionHandler(nil)
-            
-        }
-        
+        let task = session.downloadTask(with: url)
         task.resume()
     }
 
+    // MARK: URLSessionDownloadDelegate methods
+
+    public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
+        
+        guard let contentHandler = contentHandler,
+            let content = bestAttemptContent else {
+                print("No content or content handler available")
+                return
+        }
+        
+        guard let response = downloadTask.response else {
+            print("No response from the download task")
+            contentHandler(content)
+            return
+        }
+        
+        let filename = response.suggestedFilename ?? "image.jpg"
+        
+        // Copy the temporary file to a disk location and create the UNNotificationAttachment from it
+        if let fileURL = self.storeFile(temporaryLocation: location, withFilename: filename),
+            let attachment = try? UNNotificationAttachment(identifier: filename, url: fileURL) {
+            
+            content.attachments = [attachment]
+            contentHandler(content)
+            return
+        }
+        
+    }
+    
     
 }
