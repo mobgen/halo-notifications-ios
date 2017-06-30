@@ -22,8 +22,11 @@
 		282A5CD91EF977AB00EFB996 /* FirebaseNanoPB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282A5CD11EF977AB00EFB996 /* FirebaseNanoPB.framework */; };
 		282A5CDA1EF977AB00EFB996 /* GoogleToolboxForMac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282A5CD21EF977AB00EFB996 /* GoogleToolboxForMac.framework */; };
 		282A5CDB1EF977AB00EFB996 /* Protobuf.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282A5CD31EF977AB00EFB996 /* Protobuf.framework */; };
+		282A5D1C1F06555400EFB996 /* HaloNotificationServiceExtensionObjC.h in Headers */ = {isa = PBXBuildFile; fileRef = 282A5D1A1F06555400EFB996 /* HaloNotificationServiceExtensionObjC.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		282A5D1D1F06555400EFB996 /* HaloNotificationServiceExtensionObjC.m in Sources */ = {isa = PBXBuildFile; fileRef = 282A5D1B1F06555400EFB996 /* HaloNotificationServiceExtensionObjC.m */; };
+		282A5D211F065C4300EFB996 /* NotificationsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 282A5D201F065C4300EFB996 /* NotificationsUtils.swift */; };
 		2846F40C1E6D6811009DFA3D /* HaloNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846F40B1E6D6811009DFA3D /* HaloNotification.swift */; };
-		284A07831EEFD5F6002B2C98 /* HaloNotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284A07821EEFD5F6002B2C98 /* HaloNotificationService.swift */; };
+		284A07831EEFD5F6002B2C98 /* HaloNotificationServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284A07821EEFD5F6002B2C98 /* HaloNotificationServiceExtension.swift */; };
 		28B86DF61EE14C060067CC1D /* adara.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 28B86DCE1EE14C060067CC1D /* adara.aiff */; };
 		28B86DF71EE14C060067CC1D /* alya.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 28B86DCF1EE14C060067CC1D /* alya.aiff */; };
 		28B86DF81EE14C060067CC1D /* antimony.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 28B86DD01EE14C060067CC1D /* antimony.aiff */; };
@@ -96,8 +99,11 @@
 		282A5CD11EF977AB00EFB996 /* FirebaseNanoPB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseNanoPB.framework; path = Carthage/Build/iOS/FirebaseNanoPB.framework; sourceTree = "<group>"; };
 		282A5CD21EF977AB00EFB996 /* GoogleToolboxForMac.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleToolboxForMac.framework; path = Carthage/Build/iOS/GoogleToolboxForMac.framework; sourceTree = "<group>"; };
 		282A5CD31EF977AB00EFB996 /* Protobuf.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Protobuf.framework; path = Carthage/Build/iOS/Protobuf.framework; sourceTree = "<group>"; };
+		282A5D1A1F06555400EFB996 /* HaloNotificationServiceExtensionObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HaloNotificationServiceExtensionObjC.h; sourceTree = "<group>"; };
+		282A5D1B1F06555400EFB996 /* HaloNotificationServiceExtensionObjC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HaloNotificationServiceExtensionObjC.m; sourceTree = "<group>"; };
+		282A5D201F065C4300EFB996 /* NotificationsUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsUtils.swift; sourceTree = "<group>"; };
 		2846F40B1E6D6811009DFA3D /* HaloNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloNotification.swift; sourceTree = "<group>"; };
-		284A07821EEFD5F6002B2C98 /* HaloNotificationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloNotificationService.swift; sourceTree = "<group>"; };
+		284A07821EEFD5F6002B2C98 /* HaloNotificationServiceExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HaloNotificationServiceExtension.swift; sourceTree = "<group>"; };
 		28B86DCE1EE14C060067CC1D /* adara.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = adara.aiff; sourceTree = "<group>"; };
 		28B86DCF1EE14C060067CC1D /* alya.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = alya.aiff; sourceTree = "<group>"; };
 		28B86DD01EE14C060067CC1D /* antimony.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; path = antimony.aiff; sourceTree = "<group>"; };
@@ -203,10 +209,12 @@
 		00A409751D11A019005D4FB0 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				282A5D1F1F0657AA00EFB996 /* ObjC */,
 				2846F40B1E6D6811009DFA3D /* HaloNotification.swift */,
 				00B89FF61D19231700E117A5 /* FirebaseNotificationsAddon.swift */,
 				00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */,
-				284A07821EEFD5F6002B2C98 /* HaloNotificationService.swift */,
+				284A07821EEFD5F6002B2C98 /* HaloNotificationServiceExtension.swift */,
+				282A5D201F065C4300EFB996 /* NotificationsUtils.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -285,6 +293,15 @@
 			path = Sounds;
 			sourceTree = "<group>";
 		};
+		282A5D1F1F0657AA00EFB996 /* ObjC */ = {
+			isa = PBXGroup;
+			children = (
+				282A5D1A1F06555400EFB996 /* HaloNotificationServiceExtensionObjC.h */,
+				282A5D1B1F06555400EFB996 /* HaloNotificationServiceExtensionObjC.m */,
+			);
+			name = ObjC;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -293,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				282A5CAD1EF972A100EFB996 /* Firebase.h in Headers */,
+				282A5D1C1F06555400EFB996 /* HaloNotificationServiceExtensionObjC.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,7 +370,7 @@
 					};
 					00A409631D119BAF005D4FB0 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0800;
+						LastSwiftMigration = 0830;
 					};
 				};
 			};
@@ -443,9 +461,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				282A5D211F065C4300EFB996 /* NotificationsUtils.swift in Sources */,
 				00B89FFB1D194FEC00E117A5 /* NotificationsProtocols.swift in Sources */,
-				284A07831EEFD5F6002B2C98 /* HaloNotificationService.swift in Sources */,
+				284A07831EEFD5F6002B2C98 /* HaloNotificationServiceExtension.swift in Sources */,
 				00B89FF71D19231700E117A5 /* FirebaseNotificationsAddon.swift in Sources */,
+				282A5D1D1F06555400EFB996 /* HaloNotificationServiceExtensionObjC.m in Sources */,
 				2846F40C1E6D6811009DFA3D /* HaloNotification.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -624,6 +644,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloNotifications;
 				PRODUCT_NAME = HaloNotifications;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
