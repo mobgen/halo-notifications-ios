@@ -14,7 +14,6 @@
 		00B89FF71D19231700E117A5 /* FirebaseNotificationsAddon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B89FF61D19231700E117A5 /* FirebaseNotificationsAddon.swift */; };
 		00B89FFB1D194FEC00E117A5 /* NotificationsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */; };
 		282A5CAD1EF972A100EFB996 /* Firebase.h in Headers */ = {isa = PBXBuildFile; fileRef = 282A5CAB1EF9718200EFB996 /* Firebase.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		282A5CD41EF977AB00EFB996 /* FirebaseAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282A5CCC1EF977AB00EFB996 /* FirebaseAnalytics.framework */; };
 		282A5CD51EF977AB00EFB996 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282A5CCD1EF977AB00EFB996 /* FirebaseCore.framework */; };
 		282A5CD61EF977AB00EFB996 /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282A5CCE1EF977AB00EFB996 /* FirebaseCoreDiagnostics.framework */; };
 		282A5CD71EF977AB00EFB996 /* FirebaseInstanceID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282A5CCF1EF977AB00EFB996 /* FirebaseInstanceID.framework */; };
@@ -90,7 +89,6 @@
 				282A5CD61EF977AB00EFB996 /* FirebaseCoreDiagnostics.framework in Frameworks */,
 				282A5CDB1EF977AB00EFB996 /* Protobuf.framework in Frameworks */,
 				006EDC901E128CB500F583BC /* Halo.framework in Frameworks */,
-				282A5CD41EF977AB00EFB996 /* FirebaseAnalytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
