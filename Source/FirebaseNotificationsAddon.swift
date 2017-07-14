@@ -153,7 +153,7 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     @objc
     public func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
         Manager.core.logMessage("Did refresh Firebase token: \(fcmToken)", level: .info)
-        updateToken(fcmToken)
+        updateToken(fcmToken: fcmToken)
     }
 
     private func updateToken(fcmToken: String?) {
