@@ -10,7 +10,7 @@ import Foundation
 import UserNotifications
 import Halo
 import UIKit
-import Firebase
+import HaloNotifications.Firebase
 
 @objc(HaloFirebaseNotificationsAddon)
 open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAddon, UNUserNotificationCenterDelegate, MessagingDelegate {

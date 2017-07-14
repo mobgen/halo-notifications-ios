@@ -4,10 +4,12 @@ framework module HaloNotifications {
         header "HaloNotificationServiceExtensionObjC.h"
         export *
     }
+
+    module Firebase {
+        header "Firebase.h"
+        export *
+    }
+
 }
 
-framework module Firebase {
-    header "Firebase.h"
-    export *
-}
 
