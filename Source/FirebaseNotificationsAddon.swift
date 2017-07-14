@@ -10,7 +10,7 @@ import Foundation
 import UserNotifications
 import Halo
 import UIKit
-import HaloNotifications.Firebase
+import Firebase
 
 @objc(HaloFirebaseNotificationsAddon)
 open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLifecycleAddon, UNUserNotificationCenterDelegate, MessagingDelegate {
@@ -44,6 +44,7 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
         }
 
         self.completionHandler = handler
+        Messaging.messaging().delegate = self
         
         if self.autoRegister {
             registerApplicationForNotifications(app)
@@ -126,27 +127,7 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     // MARK: Notifications
     
     open func application(_ app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: CoreManager) {
-
-        if let device = Halo.Manager.core.device,
-            let token = Messaging.messaging().fcmToken {
-            
-            device.info = DeviceInfo(platform: "ios", token: token)
-            Halo.Manager.core.saveDevice { _, result in
-                
-                switch result {
-                case .success(_, _):
-                    core.logMessage("Successfully registered for remote notifications with Firebase token: \(token)", level: .info)
-                    self.completionHandler?(self, true)
-                case .failure(let error):
-                    core.logMessage("Error saving device: \(error.localizedDescription)", level: .error)
-                    self.completionHandler?(self, false)
-                }
-                
-            }
-        } else {
-            core.logMessage("Error registering for remote notifications. No Firebase token available", level: .error)
-            self.completionHandler?(self, false)
-        }
+        updateToken(fcmToken: Messaging.messaging().fcmToken)
     }
 
     open func application(_ app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: CoreManager) {
@@ -162,7 +143,7 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
             if let code = notification.payload["code"] as? String {
                 self.twoFactorDelegate?.application(app, didReceiveTwoFactorAuthCode: code, remoteNotification: notification)
             } else {
-                Halo.Manager.core.logMessage("No 'code' field was found within the payload", level: .error)
+                Manager.core.logMessage("No 'code' field was found within the payload", level: .error)
             }
         }
         
@@ -171,9 +152,27 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
 
     @objc
     public func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
-        if let device = Halo.Manager.core.device {
-            device.info = DeviceInfo(platform: "ios", token: fcmToken)
-            Halo.Manager.core.saveDevice()
+        Manager.core.logMessage("Did refresh Firebase token: \(fcmToken)", level: .info)
+        updateToken(fcmToken)
+    }
+
+    private func updateToken(fcmToken: String?) {
+        if let device = Halo.Manager.core.device,
+            let token = fcmToken {
+
+            device.info = DeviceInfo(platform: "ios", token: token)
+
+            Manager.core.saveDevice { _, result in
+
+                switch result {
+                case .success(_, _):
+                    Manager.core.logMessage("Successfully registered for remote notifications with Firebase token: \(token)", level: .info)
+                    self.completionHandler?(self, true)
+                case .failure(let error):
+                    Manager.core.logMessage("Error saving device: \(error.localizedDescription)", level: .error)
+                    self.completionHandler?(self, false)
+                }
+            }
         }
     }
 }
