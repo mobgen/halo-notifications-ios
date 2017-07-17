@@ -21,14 +21,8 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     public var twoFactorDelegate: TwoFactorAuthenticationDelegate?
 
     fileprivate var autoRegister: Bool = true
-    
-    private let registeredKey = "registeredForPushNotifications"
-    
     open var token: String?
 
-    /// Token used to make sure the startup process is done only once
-    fileprivate var once_token: Int = 0
-    
     public init(autoRegister auto: Bool = true) {
         super.init()
         self.autoRegister = auto
@@ -49,7 +43,8 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
         self.completionHandler = handler
         Messaging.messaging().delegate = self
 
-        if self.autoRegister || self.isRegistered() {
+        
+        if self.autoRegister {
             registerApplicationForNotifications(app)
         } else {
             handler?(self, true)
@@ -170,7 +165,6 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
 
                 switch result {
                 case .success(_, _):
-                    self.setIsRegistered(true)
                     Manager.core.logMessage("Successfully registered for remote notifications with Firebase token: \(token)", level: .info)
                     self.completionHandler?(self, true)
                 case .failure(let error):
@@ -179,13 +173,5 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
                 }
             }
         }
-    }
-
-    private func setIsRegistered(_ registered: Bool) {
-        UserDefaults.standard.set(registered, forKey: registeredKey)
-    }
-    
-    private func isRegistered() -> Bool {
-        return UserDefaults.standard.bool(forKey: registeredKey)
     }
 }
