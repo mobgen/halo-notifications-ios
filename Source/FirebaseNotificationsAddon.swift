@@ -130,6 +130,7 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     // MARK: Notifications
     
     open func application(_ app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: CoreManager) {
+        core.logMessage("Registered for remote notifications with token \(deviceToken.description)", level: .info)
         updateToken(fcmToken: Messaging.messaging().fcmToken)
     }
 
@@ -169,6 +170,7 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
 
                 switch result {
                 case .success(_, _):
+                    self.setIsRegistered(true)
                     Manager.core.logMessage("Successfully registered for remote notifications with Firebase token: \(token)", level: .info)
                     self.completionHandler?(self, true)
                 case .failure(let error):
