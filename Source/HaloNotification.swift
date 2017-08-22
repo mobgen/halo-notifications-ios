@@ -45,7 +45,8 @@ public class HaloNotification: NSObject {
         
         if let contentAvailable = userInfo["content_available"] as? Int, contentAvailable == 1 {
             type = .silent
-            
+        } else if let contentAvailable = userInfo["content_available"] as? String, contentAvailable == "1" {
+            type = .silent
         } else if let notifType = userInfo[Keys.NotificationType] as? String {
             switch notifType.lowercased() {
                 case "2_factor":
