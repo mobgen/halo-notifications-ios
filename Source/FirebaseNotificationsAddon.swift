@@ -40,7 +40,24 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     open func startup(app: UIApplication, haloCore core: CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)? = nil) {
         
         if FirebaseApp.app() == nil {
-            FirebaseApp.configure()
+        
+            var firebaseOptions: FirebaseOptions?
+            
+            if let path = Bundle.main.path(forResource: Manager.core.configuration, ofType: "plist") {
+            
+                if let data = NSDictionary(contentsOfFile: path),
+                    let firebasePlistName = data[CoreConstants.firebasePlistName] as? String,
+                    let firebaseConfigFile = Bundle.main.path(forResource: firebasePlistName, ofType: "plist") {
+                
+                    firebaseOptions = FirebaseOptions(contentsOfFile: firebaseConfigFile)
+                }
+            }
+
+            if let firebaseOptions = firebaseOptions {
+                FirebaseApp.configure(options: firebaseOptions)
+            } else {
+                FirebaseApp.configure()
+            }
         }
 
         self.completionHandler = handler
