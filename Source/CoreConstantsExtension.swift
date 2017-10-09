@@ -6,8 +6,10 @@
 //  Copyright © 2017 Mobgen Technology. All rights reserved.
 //
 
+import Halo
+
 /// Utility class containing some of the constants to be used within the SDK
-open class NotificationsConstants {
+extension CoreConstants {
     
     /// Key which identifies the Firebase plist file name
     static let firebasePlistName = "FIREBASE_PLIST_NAME"

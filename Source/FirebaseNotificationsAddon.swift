@@ -46,7 +46,7 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
             if let path = Bundle.main.path(forResource: Manager.core.configuration, ofType: "plist") {
             
                 if let data = NSDictionary(contentsOfFile: path),
-                    let firebasePlistName = data[NotificationsConstants.firebasePlistName] as? String,
+                    let firebasePlistName = data[CoreConstants.firebasePlistName] as? String,
                     let firebaseConfigFile = Bundle.main.path(forResource: firebasePlistName, ofType: "plist") {
                 
                     firebaseOptions = FirebaseOptions(contentsOfFile: firebaseConfigFile)
