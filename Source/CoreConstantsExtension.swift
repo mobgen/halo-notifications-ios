@@ -13,4 +13,5 @@ extension CoreConstants {
     
     /// Key which identifies the Firebase plist file name
     static let firebasePlistName = "FIREBASE_PLIST_NAME"
+    static let firebaseAvoidStartUp = "FIREBASE_AVOID_START_UP"
 }
