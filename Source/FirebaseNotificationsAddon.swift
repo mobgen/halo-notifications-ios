@@ -21,30 +21,6 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     public var twoFactorDelegate: TwoFactorAuthenticationDelegate?
 
     fileprivate var autoRegister: Bool = true
-    fileprivate var firebaseAvoidStartUp: Bool {
-        get {
-            if let path = Bundle.main.path(forResource: Manager.core.configuration, ofType: "plist"),
-                let data = NSDictionary(contentsOfFile: path),
-                let firebaseAvoidStartUp = data[CoreConstants.firebaseAvoidStartUp] as? Bool {
-                return firebaseAvoidStartUp
-            } else {
-                return false
-            }
-        }
-    }
-    fileprivate var firebaseOptions: FirebaseOptions? {
-        get {
-            if let path = Bundle.main.path(forResource: Manager.core.configuration, ofType: "plist"),
-                let data = NSDictionary(contentsOfFile: path),
-                let firebasePlistName = data[CoreConstants.firebasePlistName] as? String,
-                let firebaseConfigFile = Bundle.main.path(forResource: firebasePlistName, ofType: "plist"),
-                let firebaseOptions = FirebaseOptions(contentsOfFile: firebaseConfigFile) {
-                return firebaseOptions
-            } else {
-                return nil
-            }
-        }
-    }
     open var token: String?
 
     /// Token used to make sure the startup process is done only once
@@ -63,18 +39,22 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
 
     open func startup(app: UIApplication, haloCore core: CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)? = nil) {
         
-        if FirebaseApp.app() == nil && !firebaseAvoidStartUp {
+        if FirebaseApp.app() == nil {
             
-            if let firebaseOptions = firebaseOptions {
+            if let path = Bundle.main.path(forResource: Manager.core.configuration, ofType: "plist"),
+                let data = NSDictionary(contentsOfFile: path),
+                let firebasePlistName = data[CoreConstants.firebasePlistName] as? String,
+                let firebaseConfigFile = Bundle.main.path(forResource: firebasePlistName, ofType: "plist"),
+                let firebaseOptions = FirebaseOptions(contentsOfFile: firebaseConfigFile) {
                 
                 FirebaseApp.configure(options: firebaseOptions)
-
+            
             } else {
-                
+               
                 FirebaseApp.configure()
             }
         }
-        
+
         self.completionHandler = handler
         
         if self.autoRegister {
