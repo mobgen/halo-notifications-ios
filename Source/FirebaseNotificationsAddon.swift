@@ -23,24 +23,26 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     fileprivate var autoRegister: Bool = true
     fileprivate var firebaseAvoidStartUp: Bool {
         get {
-            guard let path = Bundle.main.path(forResource: Manager.core.configuration, ofType: "plist"),
+            if let path = Bundle.main.path(forResource: Manager.core.configuration, ofType: "plist"),
                 let data = NSDictionary(contentsOfFile: path),
-                let firebaseAvoidStartUp = data[CoreConstants.firebaseAvoidStartUp] as? Bool else {
+                let firebaseAvoidStartUp = data[CoreConstants.firebaseAvoidStartUp] as? Bool {
+                return firebaseAvoidStartUp
+            } else {
                 return false
             }
-            return firebaseAvoidStartUp
         }
     }
     fileprivate var firebaseOptions: FirebaseOptions? {
         get {
-            guard let path = Bundle.main.path(forResource: Manager.core.configuration, ofType: "plist"),
+            if let path = Bundle.main.path(forResource: Manager.core.configuration, ofType: "plist"),
                 let data = NSDictionary(contentsOfFile: path),
                 let firebasePlistName = data[CoreConstants.firebasePlistName] as? String,
                 let firebaseConfigFile = Bundle.main.path(forResource: firebasePlistName, ofType: "plist"),
-                let firebaseOptions = FirebaseOptions(contentsOfFile: firebaseConfigFile) else {
+                let firebaseOptions = FirebaseOptions(contentsOfFile: firebaseConfigFile) {
+                return firebaseOptions
+            } else {
                 return nil
             }
-            return firebaseOptions
         }
     }
     open var token: String?
