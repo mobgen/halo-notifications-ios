@@ -159,10 +159,10 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
         }
         
         //a notification reach the device
-        if (app.applicationState == UIApplicationState.active) {
-            print("Notification received by running app");
+        if (app.applicationState == UIApplicationState.background) {
+            print("App in background RECEIPT EVENT");
         } else {
-            print("App opened from Notification");
+            print("App OPEN event push");
         }
         
         self.delegate?.application(app, didReceiveRemoteNotification: notification, userInteraction: user, fetchCompletionHandler: completionHandler)
