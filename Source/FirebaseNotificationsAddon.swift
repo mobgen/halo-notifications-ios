@@ -159,7 +159,7 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
         }
         
         //a notification reach the device
-        if (app.applicationState == UIApplicationState.background) {
+        if (app.applicationState == UIApplicationState.background || app.applicationState == UIApplication.inactive) {
             print("App in background RECEIPT EVENT");
         } else {
             print("App OPEN event push");
