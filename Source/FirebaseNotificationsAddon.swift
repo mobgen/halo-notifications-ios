@@ -114,6 +114,11 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
         return true
     }
     
+    @objc(notificationAction:)
+    public func notificationAction(eventAction : String) {
+        print("pushACTION" + eventAction);
+    }
+    
     @objc(applicationDidFinishLaunching:core:launchOptions:)
     public func applicationDidFinishLaunching(_ app: UIApplication, core: CoreManager, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
         return true
@@ -157,15 +162,19 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
                 Manager.core.logMessage("No 'code' field was found within the payload", level: .error)
             }
         }
-        
-        //a notification reach the device
-        if (app.applicationState == UIApplicationState.background || app.applicationState == UIApplicationState.inactive) {
-            print("App in background RECEIPT EVENT");
-        } else {
-            print("App OPEN event push");
-        }
-        
         self.delegate?.application(app, didReceiveRemoteNotification: notification, userInteraction: user, fetchCompletionHandler: completionHandler)
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        print(response.actionIdentifier)
+    }
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
+         print("willPresent")
     }
 
     @objc
