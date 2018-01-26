@@ -13,6 +13,12 @@ public enum HaloNotificationType: Int {
     case normal, silent, twoFactor
 }
 
+public enum EventType: String {
+    case receipt = "receipt"
+    case open = "open"
+    case dismiss = "dismiss"
+}
+
 @objc
 public class HaloNotification: NSObject {
 

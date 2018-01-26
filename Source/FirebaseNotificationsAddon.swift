@@ -19,6 +19,7 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     public var addonName = "Notifications"
     public var delegate: NotificationsDelegate?
     public var twoFactorDelegate: TwoFactorAuthenticationDelegate?
+    public var notificationEvents : Bool = false
 
     fileprivate var autoRegister: Bool = true
     open var token: String?
@@ -61,6 +62,17 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
         } else {
             handler?(self, true)
         }
+    }
+    
+    @available(iOSApplicationExtension 10.0, *)
+    public func enableNotificationEvents(userNotificationCenter : UNUserNotificationCenter , notificationCategory : String){
+        // For iOS 10 display notification (sent via APNS)
+        let generalCategory = UNNotificationCategory(identifier: notificationCategory,
+                                                     actions: [],
+                                                     intentIdentifiers: [],
+                                                     options: [.customDismissAction])
+        userNotificationCenter.setNotificationCategories([generalCategory])
+        notificationEvents = true
     }
 
     public func willRegisterAddon(haloCore core: CoreManager) {
@@ -114,11 +126,6 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
         return true
     }
     
-    @objc(notificationAction:)
-    public func notificationAction(eventAction : String) {
-        print("pushACTION" + eventAction);
-    }
-    
     @objc(applicationDidFinishLaunching:core:launchOptions:)
     public func applicationDidFinishLaunching(_ app: UIApplication, core: CoreManager, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey : Any]?) -> Bool {
         return true
@@ -140,7 +147,6 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     }
     
     // MARK: Notifications
-    
     open func application(_ app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: CoreManager) {
         core.logMessage("Registered for remote notifications with token \(deviceToken.description)", level: .info)
         updateToken(fcmToken: Messaging.messaging().fcmToken)
@@ -154,7 +160,19 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     open func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
 
         let notification = HaloNotification(userInfo: userInfo)
-        
+    
+        let haloNotificationEvent : HaloNotificationEvent = HaloNotificationEvent(device: (core.device?.alias)!, schedule: userInfo["scheduleId"] as! String, action: EventType.receipt.rawValue)
+
+        if(notificationEvents){
+            core.notificationAction(notificationEvent: haloNotificationEvent, completionHandler: { (event, error) in
+                self.checkTwoFacorAndNotify(notification: notification, app: app, user: user, completionHandler: completionHandler)
+            })
+        } else {
+            checkTwoFacorAndNotify(notification: notification,app: app, user: user, completionHandler: completionHandler)
+        }
+    }
+    
+    func checkTwoFacorAndNotify(notification: HaloNotification,app: UIApplication,user:Bool,completionHandler: @escaping (UIBackgroundFetchResult) -> Void){
         if notification.type == .twoFactor {
             if let code = notification.payload["code"] as? String {
                 self.twoFactorDelegate?.application(app, didReceiveTwoFactorAuthCode: code, remoteNotification: notification)
@@ -162,19 +180,27 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
                 Manager.core.logMessage("No 'code' field was found within the payload", level: .error)
             }
         }
+        
         self.delegate?.application(app, didReceiveRemoteNotification: notification, userInteraction: user, fetchCompletionHandler: completionHandler)
     }
     
     @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                didReceive response: UNNotificationResponse,
-                                withCompletionHandler completionHandler: @escaping () -> Void) {
-        print(response.actionIdentifier)
-    }
-    
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: (UNNotificationPresentationOptions) -> Void) {
-         print("willPresent")
+    open func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, core: CoreManager,fetchCompletionHandler completionHandler: @escaping () -> Void) {
+         if(notificationEvents){
+            var  haloNotificationEvent : HaloNotificationEvent?
+            if(response.actionIdentifier ==  UNNotificationDismissActionIdentifier ) {
+                haloNotificationEvent = HaloNotificationEvent(device:  (core.device?.alias)!, schedule: (response.notification.request.content.userInfo["scheduleId"] as! String?)!, action: EventType.dismiss.rawValue)
+            } else if(response.actionIdentifier == UNNotificationDefaultActionIdentifier){
+                haloNotificationEvent = HaloNotificationEvent(device:  (core.device?.alias)!, schedule: (response.notification.request.content.userInfo["scheduleId"] as! String?)!, action: EventType.open.rawValue)
+            }
+            if let actionEvent = haloNotificationEvent {
+                core.notificationAction(notificationEvent: actionEvent, completionHandler: { (event, error) in
+                    completionHandler()
+                })
+            }
+         } else {
+            completionHandler()
+        }
     }
 
     @objc
