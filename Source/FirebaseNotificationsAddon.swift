@@ -165,14 +165,14 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
 
         if(notificationEvents){
             core.notificationAction(notificationEvent: haloNotificationEvent, completionHandler: { (event, error) in
-                self.checkTwoFacorAndNotify(notification: notification, app: app, user: user, completionHandler: completionHandler)
+                self.checkTwoFactorAndNotify(notification: notification, app: app, user: user, completionHandler: completionHandler)
             })
         } else {
-            checkTwoFacorAndNotify(notification: notification,app: app, user: user, completionHandler: completionHandler)
+            checkTwoFactorAndNotify(notification: notification,app: app, user: user, completionHandler: completionHandler)
         }
     }
     
-    func checkTwoFacorAndNotify(notification: HaloNotification,app: UIApplication,user:Bool,completionHandler: @escaping (UIBackgroundFetchResult) -> Void){
+    func checkTwoFactorAndNotify(notification: HaloNotification,app: UIApplication,user:Bool,completionHandler: @escaping (UIBackgroundFetchResult) -> Void){
         if notification.type == .twoFactor {
             if let code = notification.payload["code"] as? String {
                 self.twoFactorDelegate?.application(app, didReceiveTwoFactorAuthCode: code, remoteNotification: notification)

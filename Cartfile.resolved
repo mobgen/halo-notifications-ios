@@ -1,0 +1,2 @@
+binary "https://raw.githubusercontent.com/mobgen/halo-notifications-ios/2.3.3/halo-firebase.json" "4.0.2"
+git "file:///Users/f.souto.gonzalez/Documents/xcode/halo-ios/" "0030506ae0a86b36369554ac3075c15e9a8175bd"
