@@ -21,10 +21,6 @@ public protocol NotificationsDelegate {
     ///   - user: Whether the execution of this delegate has been triggered by a user action or not
     ///   - completionHandler: Handler to be executed for silent notifications (to
     func application(_ app: UIApplication, didReceiveRemoteNotification notification: HaloNotification, userInteraction user: Bool, fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
-    
-//    @available(iOS 10.0, *)
-//    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, fetchCompletionHandler completionHandler: ((UIBackgroundFetchResult) -> Void)?) -> Void
-    
 }
 
 @objc(HaloTwoFactorAuthenticationDelegate)
