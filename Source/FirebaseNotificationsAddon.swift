@@ -158,40 +158,54 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     }
     
     open func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        func checkTwoFactorAndNotify(notification: HaloNotification,app: UIApplication,user:Bool,completionHandler: @escaping (UIBackgroundFetchResult) -> Void){
+            if notification.type == .twoFactor {
+                if let code = notification.payload["code"] as? String {
+                    self.twoFactorDelegate?.application(app, didReceiveTwoFactorAuthCode: code, remoteNotification: notification)
+                } else {
+                    Manager.core.logMessage("No 'code' field was found within the payload", level: .error)
+                }
+            }
+            self.delegate?.application(app, didReceiveRemoteNotification: notification, userInteraction: user, fetchCompletionHandler: completionHandler)
+        }
 
         let notification = HaloNotification(userInfo: userInfo)
-    
-        let haloNotificationEvent : HaloNotificationEvent = HaloNotificationEvent(device: (core.device?.alias)!, schedule: userInfo["scheduleId"] as! String, action: EventType.receipt.rawValue)
-
+        guard let deviceAlias = core.device?.alias else {
+            checkTwoFactorAndNotify(notification: notification,app: app, user: user, completionHandler: completionHandler)
+            return
+        }
+        guard let scheduleId = userInfo["scheduleId"] as! String? else {
+            checkTwoFactorAndNotify(notification: notification,app: app, user: user, completionHandler: completionHandler)
+            return
+        }
+        
+        let haloNotificationEvent : HaloNotificationEvent = HaloNotificationEvent(device: deviceAlias, schedule: scheduleId, action: EventType.receipt.rawValue)
         if(notificationEvents){
             core.notificationAction(notificationEvent: haloNotificationEvent, completionHandler: { (event, error) in
-                self.checkTwoFactorAndNotify(notification: notification, app: app, user: user, completionHandler: completionHandler)
+                checkTwoFactorAndNotify(notification: notification, app: app, user: user, completionHandler: completionHandler)
             })
         } else {
             checkTwoFactorAndNotify(notification: notification,app: app, user: user, completionHandler: completionHandler)
         }
     }
     
-    func checkTwoFactorAndNotify(notification: HaloNotification,app: UIApplication,user:Bool,completionHandler: @escaping (UIBackgroundFetchResult) -> Void){
-        if notification.type == .twoFactor {
-            if let code = notification.payload["code"] as? String {
-                self.twoFactorDelegate?.application(app, didReceiveTwoFactorAuthCode: code, remoteNotification: notification)
-            } else {
-                Manager.core.logMessage("No 'code' field was found within the payload", level: .error)
-            }
-        }
-        
-        self.delegate?.application(app, didReceiveRemoteNotification: notification, userInteraction: user, fetchCompletionHandler: completionHandler)
-    }
-    
     @available(iOS 10.0, *)
     open func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, core: CoreManager,fetchCompletionHandler completionHandler: @escaping () -> Void) {
          if(notificationEvents){
+            guard let deviceAlias = core.device?.alias else {
+                completionHandler()
+                return
+            }
+            guard let scheduleId = response.notification.request.content.userInfo["scheduleId"] as! String? else {
+                completionHandler()
+                return
+            }
             var  haloNotificationEvent : HaloNotificationEvent?
             if(response.actionIdentifier ==  UNNotificationDismissActionIdentifier ) {
-                haloNotificationEvent = HaloNotificationEvent(device:  (core.device?.alias)!, schedule: (response.notification.request.content.userInfo["scheduleId"] as! String?)!, action: EventType.dismiss.rawValue)
+                haloNotificationEvent = HaloNotificationEvent(device:  deviceAlias, schedule: scheduleId, action: EventType.dismiss.rawValue)
             } else if(response.actionIdentifier == UNNotificationDefaultActionIdentifier){
-                haloNotificationEvent = HaloNotificationEvent(device:  (core.device?.alias)!, schedule: (response.notification.request.content.userInfo["scheduleId"] as! String?)!, action: EventType.open.rawValue)
+                haloNotificationEvent = HaloNotificationEvent(device:  deviceAlias, schedule: scheduleId, action: EventType.open.rawValue)
             }
             if let actionEvent = haloNotificationEvent {
                 core.notificationAction(notificationEvent: actionEvent, completionHandler: { (event, error) in
