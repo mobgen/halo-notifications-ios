@@ -19,6 +19,7 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     public var addonName = "Notifications"
     public var delegate: NotificationsDelegate?
     public var twoFactorDelegate: TwoFactorAuthenticationDelegate?
+    public var notificationEvents : Bool = false
 
     fileprivate var autoRegister: Bool = true
     open var token: String?
@@ -37,7 +38,19 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     open func startup(app: UIApplication, haloCore core: CoreManager, completionHandler handler: ((HaloAddon, Bool) -> Void)? = nil) {
         
         if FirebaseApp.app() == nil {
-            FirebaseApp.configure()
+            
+            if let path = Bundle.main.path(forResource: Manager.core.configuration, ofType: "plist"),
+                let data = NSDictionary(contentsOfFile: path),
+                let firebasePlistName = data[CoreConstants.firebasePlistName] as? String,
+                let firebaseConfigFile = Bundle.main.path(forResource: firebasePlistName, ofType: "plist"),
+                let firebaseOptions = FirebaseOptions(contentsOfFile: firebaseConfigFile) {
+                
+                FirebaseApp.configure(options: firebaseOptions)
+            
+            } else {
+               
+                FirebaseApp.configure()
+            }
         }
 
         self.completionHandler = handler
@@ -49,6 +62,17 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
         } else {
             handler?(self, true)
         }
+    }
+    
+    @available(iOSApplicationExtension 10.0, *)
+    public func enableNotificationEvents(userNotificationCenter : UNUserNotificationCenter , notificationCategory : String){
+        // For iOS 10 display notification (sent via APNS)
+        let generalCategory = UNNotificationCategory(identifier: notificationCategory,
+                                                     actions: [],
+                                                     intentIdentifiers: [],
+                                                     options: [.customDismissAction])
+        userNotificationCenter.setNotificationCategories([generalCategory])
+        notificationEvents = true
     }
 
     public func willRegisterAddon(haloCore core: CoreManager) {
@@ -123,7 +147,6 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     }
     
     // MARK: Notifications
-    
     open func application(_ app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: CoreManager) {
         core.logMessage("Registered for remote notifications with token \(deviceToken.description)", level: .info)
         updateToken(fcmToken: Messaging.messaging().fcmToken)
@@ -135,18 +158,63 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     }
     
     open func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        
+        func checkTwoFactorAndNotify(notification: HaloNotification,app: UIApplication,user:Bool,completionHandler: @escaping (UIBackgroundFetchResult) -> Void){
+            if notification.type == .twoFactor {
+                if let code = notification.payload["code"] as? String {
+                    self.twoFactorDelegate?.application(app, didReceiveTwoFactorAuthCode: code, remoteNotification: notification)
+                } else {
+                    Manager.core.logMessage("No 'code' field was found within the payload", level: .error)
+                }
+            }
+            self.delegate?.application(app, didReceiveRemoteNotification: notification, userInteraction: user, fetchCompletionHandler: completionHandler)
+        }
 
         let notification = HaloNotification(userInfo: userInfo)
-        
-        if notification.type == .twoFactor {
-            if let code = notification.payload["code"] as? String {
-                self.twoFactorDelegate?.application(app, didReceiveTwoFactorAuthCode: code, remoteNotification: notification)
-            } else {
-                Manager.core.logMessage("No 'code' field was found within the payload", level: .error)
-            }
+        guard let deviceAlias = core.device?.alias else {
+            checkTwoFactorAndNotify(notification: notification,app: app, user: user, completionHandler: completionHandler)
+            return
+        }
+        guard let scheduleId = userInfo["scheduleId"] as! String? else {
+            checkTwoFactorAndNotify(notification: notification,app: app, user: user, completionHandler: completionHandler)
+            return
         }
         
-        self.delegate?.application(app, didReceiveRemoteNotification: notification, userInteraction: user, fetchCompletionHandler: completionHandler)
+        let haloNotificationEvent : HaloNotificationEvent = HaloNotificationEvent(device: deviceAlias, schedule: scheduleId, action: EventType.receipt.rawValue)
+        if(notificationEvents){
+            core.notificationAction(notificationEvent: haloNotificationEvent, completionHandler: { (event, error) in
+                checkTwoFactorAndNotify(notification: notification, app: app, user: user, completionHandler: completionHandler)
+            })
+        } else {
+            checkTwoFactorAndNotify(notification: notification,app: app, user: user, completionHandler: completionHandler)
+        }
+    }
+    
+    @available(iOS 10.0, *)
+    open func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, core: CoreManager,fetchCompletionHandler completionHandler: @escaping () -> Void) {
+         if(notificationEvents){
+            guard let deviceAlias = core.device?.alias else {
+                completionHandler()
+                return
+            }
+            guard let scheduleId = response.notification.request.content.userInfo["scheduleId"] as! String? else {
+                completionHandler()
+                return
+            }
+            var  haloNotificationEvent : HaloNotificationEvent?
+            if(response.actionIdentifier ==  UNNotificationDismissActionIdentifier ) {
+                haloNotificationEvent = HaloNotificationEvent(device:  deviceAlias, schedule: scheduleId, action: EventType.dismiss.rawValue)
+            } else if(response.actionIdentifier == UNNotificationDefaultActionIdentifier){
+                haloNotificationEvent = HaloNotificationEvent(device:  deviceAlias, schedule: scheduleId, action: EventType.open.rawValue)
+            }
+            if let actionEvent = haloNotificationEvent {
+                core.notificationAction(notificationEvent: actionEvent, completionHandler: { (event, error) in
+                    completionHandler()
+                })
+            }
+         } else {
+            completionHandler()
+        }
     }
 
     @objc

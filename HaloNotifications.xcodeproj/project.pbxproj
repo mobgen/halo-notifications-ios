@@ -13,6 +13,7 @@
 		006EDC9C1E1297FD00F583BC /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005271181DEF3F07005826B7 /* UserNotifications.framework */; };
 		00B89FF71D19231700E117A5 /* FirebaseNotificationsAddon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B89FF61D19231700E117A5 /* FirebaseNotificationsAddon.swift */; };
 		00B89FFB1D194FEC00E117A5 /* NotificationsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */; };
+		228487141F8B788600775B54 /* CoreConstantsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228487131F8B788600775B54 /* CoreConstantsExtension.swift */; };
 		282A5CAD1EF972A100EFB996 /* Firebase.h in Headers */ = {isa = PBXBuildFile; fileRef = 282A5CAB1EF9718200EFB996 /* Firebase.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		282A5CD51EF977AB00EFB996 /* FirebaseCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282A5CCD1EF977AB00EFB996 /* FirebaseCore.framework */; };
 		282A5CD61EF977AB00EFB996 /* FirebaseCoreDiagnostics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 282A5CCE1EF977AB00EFB996 /* FirebaseCoreDiagnostics.framework */; };
@@ -48,6 +49,7 @@
 		00A409771D11A019005D4FB0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00B89FF61D19231700E117A5 /* FirebaseNotificationsAddon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseNotificationsAddon.swift; sourceTree = "<group>"; };
 		00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsProtocols.swift; sourceTree = "<group>"; };
+		228487131F8B788600775B54 /* CoreConstantsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreConstantsExtension.swift; sourceTree = "<group>"; };
 		282A5CAA1EF970E600EFB996 /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		282A5CAB1EF9718200EFB996 /* Firebase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Firebase.h; sourceTree = "<group>"; };
 		282A5CCC1EF977AB00EFB996 /* FirebaseAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FirebaseAnalytics.framework; path = Carthage/Build/iOS/FirebaseAnalytics.framework; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 				00B89FFA1D194FEC00E117A5 /* NotificationsProtocols.swift */,
 				284A07821EEFD5F6002B2C98 /* HaloNotificationServiceExtension.swift */,
 				282A5D201F065C4300EFB996 /* NotificationsUtils.swift */,
+				228487131F8B788600775B54 /* CoreConstantsExtension.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -294,6 +297,7 @@
 				282A5D211F065C4300EFB996 /* NotificationsUtils.swift in Sources */,
 				00B89FFB1D194FEC00E117A5 /* NotificationsProtocols.swift in Sources */,
 				284A07831EEFD5F6002B2C98 /* HaloNotificationServiceExtension.swift in Sources */,
+				228487141F8B788600775B54 /* CoreConstantsExtension.swift in Sources */,
 				00B89FF71D19231700E117A5 /* FirebaseNotificationsAddon.swift in Sources */,
 				282A5D1D1F06555400EFB996 /* HaloNotificationServiceExtensionObjC.m in Sources */,
 				2846F40C1E6D6811009DFA3D /* HaloNotification.swift in Sources */,
