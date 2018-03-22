@@ -140,7 +140,9 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     }
     
     public func applicationWillChangeEnvironment(_ app: UIApplication, core: CoreManager) {
-        app.unregisterForRemoteNotifications()
+        DispatchQueue.main.async {
+             app.unregisterForRemoteNotifications()
+        }
     }
     
     public func applicationDidChangeEnvironment(_ app: UIApplication, core: CoreManager) {
@@ -150,11 +152,17 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     open func application(_ app: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data, core: CoreManager) {
         core.logMessage("Registered for remote notifications with token \(deviceToken.description)", level: .info)
         updateToken(fcmToken: Messaging.messaging().fcmToken)
+        self.completionHandler?(self, true)
     }
 
     open func application(_ app: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError, core: CoreManager) {
         core.logMessage("Error registering for remote notifications. \(error.localizedDescription)", level: .error)
-        self.completionHandler?(self, false)
+        
+        #if (arch(i386) || arch(x86_64)) && os(iOS)
+            self.completionHandler?(self, true)
+        #else
+            self.completionHandler?(self, false)
+        #endif
     }
     
     open func application(_ app: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], core: CoreManager, userInteraction user: Bool, fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
