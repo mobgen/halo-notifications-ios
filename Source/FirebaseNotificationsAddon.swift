@@ -226,7 +226,7 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
     }
 
     @objc
-    public func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+    public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         Manager.core.logMessage("Did refresh Firebase token: \(fcmToken)", level: .info)
         updateToken(fcmToken: fcmToken)
     }
