@@ -73,4 +73,9 @@ public class HaloNotification: NSObject {
         super.init()
     }
     
+    @available(iOS 10.0, *)
+    public convenience init(unNotification: UNNotification) {
+        self.init(userInfo: unNotification.request.content.userInfo)
+        
+    }
 }

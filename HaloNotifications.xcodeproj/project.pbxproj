@@ -28,7 +28,7 @@
 		2846F40C1E6D6811009DFA3D /* HaloNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2846F40B1E6D6811009DFA3D /* HaloNotification.swift */; };
 		284A07831EEFD5F6002B2C98 /* HaloNotificationServiceExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284A07821EEFD5F6002B2C98 /* HaloNotificationServiceExtension.swift */; };
 		28C24C181EF2B28A006880DF /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 005271181DEF3F07005826B7 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		2B8E56F0202B12730024C9C7 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8E56EF202B12730024C9C7 /* nanopb.framework */; };
+		2BE45B8520CE750800FECD39 /* nanopb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B8E56EF202B12730024C9C7 /* nanopb.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,14 +86,14 @@
 			files = (
 				282A5CDA1EF977AB00EFB996 /* GoogleToolboxForMac.framework in Frameworks */,
 				282A5CD51EF977AB00EFB996 /* FirebaseCore.framework in Frameworks */,
-				2B8E56F0202B12730024C9C7 /* nanopb.framework in Frameworks */,
 				282A5CD81EF977AB00EFB996 /* FirebaseMessaging.framework in Frameworks */,
 				282A5CD71EF977AB00EFB996 /* FirebaseInstanceID.framework in Frameworks */,
 				282A5CD91EF977AB00EFB996 /* FirebaseNanoPB.framework in Frameworks */,
 				28C24C181EF2B28A006880DF /* UserNotifications.framework in Frameworks */,
 				282A5CD61EF977AB00EFB996 /* FirebaseCoreDiagnostics.framework in Frameworks */,
-				282A5CDB1EF977AB00EFB996 /* Protobuf.framework in Frameworks */,
 				006EDC901E128CB500F583BC /* Halo.framework in Frameworks */,
+				2BE45B8520CE750800FECD39 /* nanopb.framework in Frameworks */,
+				282A5CDB1EF977AB00EFB996 /* Protobuf.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,7 +237,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0920;
+				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Mobgen Technology";
 				TargetAttributes = {
 					006EDC821E12841900F583BC = {
@@ -247,7 +247,7 @@
 					};
 					00A409631D119BAF005D4FB0 = {
 						CreatedOnToolsVersion = 7.3.1;
-						LastSwiftMigration = 0830;
+						LastSwiftMigration = 0940;
 					};
 				};
 			};
@@ -372,12 +372,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -430,12 +432,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -495,7 +499,8 @@
 				PRODUCT_NAME = HaloNotifications;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
 		};
@@ -525,7 +530,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mobgen.HaloNotifications;
 				PRODUCT_NAME = HaloNotifications;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
 		};
