@@ -13,6 +13,7 @@ import Foundation
 @available(iOSApplicationExtension 10.0, *)
 class NotificationsUtils: NSObject {
     
+    @objc
     class func didReceive(_ request: UNNotificationRequest, withContent content: UNMutableNotificationContent?, contentHandler: @escaping (UNNotificationContent) -> Void, delegate: URLSessionDownloadDelegate) {
         
         guard let content = content,
@@ -30,6 +31,7 @@ class NotificationsUtils: NSObject {
         
     }
     
+    @objc
     class func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL, content: UNMutableNotificationContent?, contentHandler:  ((UNNotificationContent) -> Void)?) {
         
         guard let contentHandler = contentHandler,
@@ -57,6 +59,7 @@ class NotificationsUtils: NSObject {
         
     }
     
+    @objc
     class func storeFile(temporaryLocation location: URL, withFilename filename: String) -> URL? {
         
         let fileManager = FileManager.default
@@ -77,6 +80,7 @@ class NotificationsUtils: NSObject {
         return nil
     }
     
+    @objc
     class func loadAttachment(forMedia media: String, delegate: URLSessionDownloadDelegate) {
         
         guard let url = URL(string: media) else {
