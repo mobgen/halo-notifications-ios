@@ -29,6 +29,7 @@ public class HaloNotification: NSObject {
         static let Icon = "icon"
         static let Sound = "sound"
         static let NotificationType = "type"
+        static let TemplateName = "template"
     }
     
     public internal(set) var scheduleId: String?
@@ -36,6 +37,7 @@ public class HaloNotification: NSObject {
     public internal(set) var body: String?
     public internal(set) var icon: String?
     public internal(set) var sound: String?
+    public internal(set) var template: String?
     public internal(set) var type: HaloNotificationType
     public internal(set) var payload: [AnyHashable: Any]
     
@@ -46,6 +48,7 @@ public class HaloNotification: NSObject {
         body = userInfo[Keys.Body] as? String
         sound = userInfo[Keys.Sound] as? String
         icon = userInfo[Keys.Icon] as? String
+        template = userInfo[Keys.TemplateName] as? String
         type = .normal
         payload = userInfo
         
@@ -67,6 +70,7 @@ public class HaloNotification: NSObject {
                 title = alert[Keys.Title] as? String
                 body = alert[Keys.Body] as? String
                 sound = aps[Keys.Sound] as? String
+                template = aps[Keys.TemplateName] as? String
             }
         }
         
