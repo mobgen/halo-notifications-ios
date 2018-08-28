@@ -1,3 +1,3 @@
-github "mobgen/halo-ios" "2.4.0"
+github "mobgen/halo-ios" "2.6.0"
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseAnalyticsBinary.json"
 binary "https://dl.google.com/dl/firebase/ios/carthage/FirebaseMessagingBinary.json"
