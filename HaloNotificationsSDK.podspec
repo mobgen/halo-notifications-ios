@@ -17,6 +17,6 @@ Pod::Spec.new do |spec|
   spec.source_files     = 'halo-notifications-ios-2.6.0/Source/**/*.swift'
   spec.resources        = ['halo-notifications-ios-2.6.0/Sounds/*'] 
 
-  spec.dependency 'HaloSDK'
+  spec.dependency 'HaloSDK' , '~> 2.6.0'
 
 end
