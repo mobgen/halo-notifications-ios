@@ -88,7 +88,7 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
         if #available(iOS 10.0, *) {
             registerApplicationForNotificationsWithAuthOptions(app)
         } else {
-            registerApplicationForNotificationsWithSettings(app)
+            // registerApplicationForNotificationsWithSettings(app)
         }
     }
     
@@ -107,17 +107,17 @@ open class FirebaseNotificationsAddon: NSObject, HaloNotificationsAddon, HaloLif
         
     }
     
-    @available(iOS, obsoleted: 10.0)
-    public func registerApplicationForNotificationsWithSettings(
-        _ app: UIApplication,
-        notificationSettings settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)) -> Void {
-        
-        app.registerUserNotificationSettings(settings)
-        
-        app.registerForRemoteNotifications()
-        
-    }
-    
+//    @available(iOS, obsoleted: 10.0)
+//    public func registerApplicationForNotificationsWithSettings(
+//        _ app: UIApplication,
+//        notificationSettings settings: UIUserNotificationSettings = UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)) -> Void {
+//        
+//        app.registerUserNotificationSettings(settings)
+//        
+//        app.registerForRemoteNotifications()
+//        
+//    }
+//    
     // MARK: Lifecycle
     
     @objc(applicationWillFinishLaunching:core:)
